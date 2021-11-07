@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Rootless UI Mods</string>
+    <string name="shizuku_needed_title">Shizuku App Needed</string>
+    <string name="shizuku_needed_text">You need to install the Shizuku app from the PlayStore and start it using ADB.</string>
+</resources>
