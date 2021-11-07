@@ -1,6 +1,5 @@
 package com.strangerweather.rootlessuimods
 
-import android.content.Context
 import android.content.pm.PackageManager
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -11,16 +10,12 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.window.DialogProperties
 import com.strangerweather.rootlessuimods.ui.theme.RootlessUIModsTheme
 import rikka.shizuku.Shizuku
-import rikka.shizuku.ShizukuProvider
+import rikka.shizuku.Shizuku.checkSelfPermission
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -34,6 +29,9 @@ class MainActivity : ComponentActivity() {
                 // A surface container using the 'background' color from the theme
                 Surface(color = MaterialTheme.colors.background) {
                     if (!shizukuAvailable) ShowShizukuDialog() else checkShizukuPermission()
+                    if (checkShizukuPermission()) {
+                        Text(text = "Victory!")
+                    }
 
                 }
             }
@@ -44,13 +42,19 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun ShowShizukuDialog() {
     AlertDialog(modifier = Modifier.width(200.dp),
-        title = {Text(stringResource(id = R.string.shizuku_needed_title))},
+        title = { Text(stringResource(id = R.string.shizuku_needed_title)) },
         text = { Text(stringResource(id = R.string.shizuku_needed_text)) },
         buttons = {},
         onDismissRequest = {})
 }
 
 
-fun checkShizukuPermission() {
-    println("Check")
+fun checkShizukuPermission(): Boolean {
+    val isGranted = if (Shizuku.isPreV11() || Shizuku.getVersion() < 11) {
+        checkSelfPermission() == PackageManager.PERMISSION_GRANTED
+    } else {
+        checkSelfPermission() == PackageManager.PERMISSION_GRANTED
+    }
+    println("isGranted = $isGranted")
+    return isGranted
 }
