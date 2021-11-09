@@ -1,5 +1,7 @@
 package com.strangerweather.rootlessuimods
 
+import android.annotation.SuppressLint
+import android.content.Context
 import android.content.pm.PackageManager
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -14,12 +16,18 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.strangerweather.rootlessuimods.ui.theme.RootlessUIModsTheme
+import org.lsposed.hiddenapibypass.HiddenApiBypass
 import rikka.shizuku.Shizuku
 import rikka.shizuku.Shizuku.checkSelfPermission
+import java.io.BufferedReader
+import java.io.InputStreamReader
+
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        HiddenApiBypass.setHiddenApiExemptions("L")
 
         val shizukuAvailable = Shizuku.pingBinder()
         println("shizukuAvailable = $shizukuAvailable")
@@ -28,11 +36,11 @@ class MainActivity : ComponentActivity() {
             RootlessUIModsTheme {
                 // A surface container using the 'background' color from the theme
                 Surface(color = MaterialTheme.colors.background) {
+                    val context = applicationContext
                     if (!shizukuAvailable) ShowShizukuDialog() else checkShizukuPermission()
                     if (checkShizukuPermission()) {
-                        Text(text = "Victory!")
+                        test()
                     }
-
                 }
             }
         }
@@ -55,6 +63,10 @@ fun checkShizukuPermission(): Boolean {
     } else {
         checkSelfPermission() == PackageManager.PERMISSION_GRANTED
     }
-    println("isGranted = $isGranted")
     return isGranted
+}
+
+fun test() {
+    val commandStart = "cmd "
+    Runtime.getRuntime().exec(commandStart)
 }
