@@ -1,7 +1,6 @@
 package com.strangerweather.rootlessuimods
 
 import android.annotation.SuppressLint
-import android.content.Context
 import android.content.pm.PackageManager
 import android.os.Bundle
 import android.os.IBinder
@@ -17,7 +16,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.strangerweather.rootlessuimods.ui.theme.RootlessUIModsTheme
-import moe.shizuku.server.IShizukuService
 import org.lsposed.hiddenapibypass.HiddenApiBypass
 import rikka.shizuku.Shizuku
 import rikka.shizuku.Shizuku.checkSelfPermission
@@ -40,7 +38,6 @@ class MainActivity : ComponentActivity() {
             RootlessUIModsTheme {
                 // A surface container using the 'background' color from the theme
                 Surface(color = MaterialTheme.colors.background) {
-                    val context = applicationContext
                     if (!shizukuAvailable) ShowShizukuDialog() else checkShizukuPermission()
                     if (checkShizukuPermission()) {
                         accessApis()
@@ -76,11 +73,16 @@ fun accessApis(){
     val iPmClass = Class.forName("android.content.pm.IPackageManager")
     val iPmStub = Class.forName("android.content.pm.IPackageManager\$Stub")
     val asInterfaceMethod = iPmStub.getMethod("asInterface", IBinder::class.java)
-    val grantRuntimePermissionMethod = iPmClass.getMethod("grantRuntimePermission", String::class.java /* package name */, String::class.java /* permission name */, Int::class.java /* user ID */)
+    val grantRuntimePermissionMethod = iPmClass.getMethod("grantRuntimePermission",
+        String::class.java /* package name */,
+        String::class.java /* permission name */,
+        Int::class.java /* user ID */)
 
-    val iPmInstance = asInterfaceMethod.invoke(null, ShizukuBinderWrapper(SystemServiceHelper.getSystemService("package")))
+    val iPmInstance = asInterfaceMethod.invoke(null,
+        ShizukuBinderWrapper(SystemServiceHelper.getSystemService("package")))
 
-    grantRuntimePermissionMethod.invoke(iPmInstance, "com.strangerweather.rootlessuimods", android.Manifest.permission.WRITE_SECURE_SETTINGS, 0)
+    grantRuntimePermissionMethod.invoke(iPmInstance, "com.strangerweather.rootlessuimods",
+        android.Manifest.permission.WRITE_SECURE_SETTINGS, 0)
 }
 
 @Composable
