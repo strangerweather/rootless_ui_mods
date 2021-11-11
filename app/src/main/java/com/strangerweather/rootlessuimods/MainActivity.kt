@@ -21,6 +21,7 @@ import rikka.shizuku.Shizuku
 import rikka.shizuku.Shizuku.checkSelfPermission
 import rikka.shizuku.ShizukuBinderWrapper
 import rikka.shizuku.SystemServiceHelper.getSystemService
+import kotlin.streams.toList
 
 
 class MainActivity : ComponentActivity() {
@@ -93,9 +94,16 @@ fun accessApis() {
 @Composable
 fun AdbTest() {
 
-    val command = ""
 
+    val command = "cmd overlay list"
+
+//    val command = "cmd overlay fabricate com.android.systemui:integer/quick_settings_num_columns 3"
+//
     ProcessBuilder().command("sh", "-c", command).start().run {
+        val lines = inputStream.bufferedReader().lines().toList()
+        destroy()
+
+        Text(text = lines.toString())
     }
 }
 
