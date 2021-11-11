@@ -114,7 +114,7 @@ class SystemProperties private constructor() {
         }
 
         private val systemPropertiesClass: Class<*>?
-            @SuppressLint("PrivateApi") private get() = try {
+            @SuppressLint("PrivateApi") get() = try {
                 Class.forName("android.os.SystemProperties")
             } catch (shouldNotHappen: ClassNotFoundException) {
                 null
