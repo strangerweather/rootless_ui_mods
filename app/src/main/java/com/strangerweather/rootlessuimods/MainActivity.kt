@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.content.pm.PackageManager
 import android.os.Bundle
 import android.os.IBinder
+import android.app.UiModeManager
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.width
@@ -21,8 +22,10 @@ import rikka.shizuku.Shizuku
 import rikka.shizuku.Shizuku.checkSelfPermission
 import rikka.shizuku.ShizukuBinderWrapper
 import rikka.shizuku.SystemServiceHelper
+import rikka.shizuku.SystemServiceHelper.getSystemService
 import java.io.BufferedReader
 import java.io.InputStreamReader
+import kotlin.streams.toList
 
 
 class MainActivity : ComponentActivity() {
@@ -34,6 +37,7 @@ class MainActivity : ComponentActivity() {
         val shizukuAvailable = Shizuku.pingBinder()
         println("shizukuAvailable = $shizukuAvailable")
 
+
         setContent {
             RootlessUIModsTheme {
                 // A surface container using the 'background' color from the theme
@@ -41,7 +45,9 @@ class MainActivity : ComponentActivity() {
                     if (!shizukuAvailable) ShowShizukuDialog() else checkShizukuPermission()
                     if (checkShizukuPermission()) {
                         accessApis()
-                        AdbTest()
+                       runCommands(
+                           commands = arrayOf("com.android.systemui:integer/quick_settings_num_columns", "3")
+                       )
                     }
                 }
             }
@@ -69,30 +75,44 @@ fun checkShizukuPermission(): Boolean {
 }
 
 @SuppressLint("PrivateApi")
-fun accessApis(){
+fun accessApis() {
     val iPmClass = Class.forName("android.content.pm.IPackageManager")
     val iPmStub = Class.forName("android.content.pm.IPackageManager\$Stub")
     val asInterfaceMethod = iPmStub.getMethod("asInterface", IBinder::class.java)
-    val grantRuntimePermissionMethod = iPmClass.getMethod("grantRuntimePermission",
+    val grantRuntimePermissionMethod = iPmClass.getMethod(
+        "grantRuntimePermission",
         String::class.java /* package name */,
         String::class.java /* permission name */,
-        Int::class.java /* user ID */)
+        Int::class.java /* user ID */
+    )
 
-    val iPmInstance = asInterfaceMethod.invoke(null,
-        ShizukuBinderWrapper(SystemServiceHelper.getSystemService("package")))
+    val iPmInstance = asInterfaceMethod.invoke(
+        null,
+        ShizukuBinderWrapper(getSystemService("package"))
+    )
 
-    grantRuntimePermissionMethod.invoke(iPmInstance, "com.strangerweather.rootlessuimods",
-        android.Manifest.permission.WRITE_SECURE_SETTINGS, 0)
+    grantRuntimePermissionMethod.invoke(
+        iPmInstance, "com.strangerweather.rootlessuimods",
+        android.Manifest.permission.WRITE_SECURE_SETTINGS, 0
+    )
 }
 
 @Composable
-fun AdbTest() {
-    val command = ""
-    val process = Runtime.getRuntime().exec(command)
-    process.waitFor()
-    val reader = BufferedReader(
-        InputStreamReader(process.inputStream)
-    )
-    val output = reader.readLines()
-   Text(text = output.toString())
+fun AdbTest(command: String) {
+        ProcessBuilder().command("sh", "-c", command).start().run {
+            val lines = inputStream.bufferedReader().lines().toList()
+            destroy()
+            Text(text = lines.toString())
+        }
+    }
+
+
+//
+private fun runCommands(vararg commands: String) {
+    ProcessBuilder().run {
+        commands.forEach {
+            command("sh", "-c", it).start().waitFor()
+        }
+    }
 }
+
