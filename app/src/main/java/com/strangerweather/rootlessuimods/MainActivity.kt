@@ -4,7 +4,6 @@ import android.annotation.SuppressLint
 import android.content.pm.PackageManager
 import android.os.Bundle
 import android.os.IBinder
-import android.app.UiModeManager
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.width
@@ -21,11 +20,7 @@ import org.lsposed.hiddenapibypass.HiddenApiBypass
 import rikka.shizuku.Shizuku
 import rikka.shizuku.Shizuku.checkSelfPermission
 import rikka.shizuku.ShizukuBinderWrapper
-import rikka.shizuku.SystemServiceHelper
 import rikka.shizuku.SystemServiceHelper.getSystemService
-import java.io.BufferedReader
-import java.io.InputStreamReader
-import kotlin.streams.toList
 
 
 class MainActivity : ComponentActivity() {
@@ -45,9 +40,7 @@ class MainActivity : ComponentActivity() {
                     if (!shizukuAvailable) ShowShizukuDialog() else checkShizukuPermission()
                     if (checkShizukuPermission()) {
                         accessApis()
-                       runCommands(
-                           commands = arrayOf("com.android.systemui:integer/quick_settings_num_columns", "3")
-                       )
+                        AdbTest()
                     }
                 }
             }
@@ -98,21 +91,12 @@ fun accessApis() {
 }
 
 @Composable
-fun AdbTest(command: String) {
-        ProcessBuilder().command("sh", "-c", command).start().run {
-            val lines = inputStream.bufferedReader().lines().toList()
-            destroy()
-            Text(text = lines.toString())
-        }
-    }
+fun AdbTest() {
 
+    val command = ""
 
-//
-private fun runCommands(vararg commands: String) {
-    ProcessBuilder().run {
-        commands.forEach {
-            command("sh", "-c", it).start().waitFor()
-        }
+    ProcessBuilder().command("sh", "-c", command).start().run {
     }
 }
+
 
