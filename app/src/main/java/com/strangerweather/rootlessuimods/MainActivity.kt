@@ -20,6 +20,7 @@ import org.lsposed.hiddenapibypass.HiddenApiBypass
 import rikka.shizuku.Shizuku
 import rikka.shizuku.Shizuku.checkSelfPermission
 import rikka.shizuku.ShizukuBinderWrapper
+import rikka.shizuku.ShizukuProvider
 import rikka.shizuku.SystemServiceHelper.getSystemService
 import kotlin.streams.toList
 
@@ -33,6 +34,7 @@ class MainActivity : ComponentActivity() {
         val shizukuAvailable = Shizuku.pingBinder()
         println("shizukuAvailable = $shizukuAvailable")
 
+        ShizukuProvider.enableMultiProcessSupport(true)
 
         setContent {
             RootlessUIModsTheme {
@@ -70,8 +72,8 @@ fun checkShizukuPermission(): Boolean {
 
 @SuppressLint("PrivateApi")
 fun accessApis() {
-    val iPmClass = Class.forName("android.content.pm.IPackageManager")
-    val iPmStub = Class.forName("android.content.pm.IPackageManager\$Stub")
+    val iPmClass = Class.forName("android.content.om.IOverlayManager")
+    val iPmStub = Class.forName("android.content.om.IOverlayManager\$Stub")
     val asInterfaceMethod = iPmStub.getMethod("asInterface", IBinder::class.java)
     val grantRuntimePermissionMethod = iPmClass.getMethod(
         "grantRuntimePermission",
@@ -82,7 +84,7 @@ fun accessApis() {
 
     val iPmInstance = asInterfaceMethod.invoke(
         null,
-        ShizukuBinderWrapper(getSystemService("package"))
+        ShizukuBinderWrapper(getSystemService("overlay"))
     )
 
     grantRuntimePermissionMethod.invoke(
