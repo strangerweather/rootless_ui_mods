@@ -43,7 +43,7 @@ class MainActivity : ComponentActivity() {
                     if (!shizukuAvailable) ShowShizukuDialog() else checkShizukuPermission()
                     if (checkShizukuPermission()) {
                         accessApis()
-                        AdbTest()
+//                        AdbTest()
                     }
                 }
             }
