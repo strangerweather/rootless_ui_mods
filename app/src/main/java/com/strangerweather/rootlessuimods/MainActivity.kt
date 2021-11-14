@@ -1,10 +1,12 @@
 package com.strangerweather.rootlessuimods
 
-import android.content.Context
 import android.content.pm.ApplicationInfo
 import android.os.Bundle
+import android.util.TypedValue
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.width
 import androidx.compose.material.*
 import androidx.compose.runtime.*
@@ -14,10 +16,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.strangerweather.rootlessuimods.ui.theme.RootlessUIModsTheme
 import org.lsposed.hiddenapibypass.HiddenApiBypass
-import tk.zwander.fabricateoverlay.FabricatedOverlay
-import tk.zwander.fabricateoverlay.FabricatedOverlayEntry
-import tk.zwander.fabricateoverlay.OverlayAPI
-import tk.zwander.fabricateoverlay.ShizukuUtils
+import tk.zwander.fabricateoverlay.*
 
 
 class MainActivity : ComponentActivity() {
@@ -27,10 +26,8 @@ class MainActivity : ComponentActivity() {
 
         setContent {
             RootlessUIModsTheme {
-                // A surface container using the 'background' color from the theme
                 Surface(color = MaterialTheme.colors.background) {
-                    val overlayEntries = remember { mutableStateListOf<FabricatedOverlayEntry>() }
-                    val context = LocalContext.current
+
 
                     if (!ShizukuUtils.shizukuAvailable) {
                         ShowShizukuDialog()
@@ -38,50 +35,81 @@ class MainActivity : ComponentActivity() {
 
                     //TODO: add permission dialog
                     if (ShizukuUtils.hasShizukuPermission(this)) {
-//                        SaveOverlay(
-//                            context = context,
-//                            info = applicationInfo,
-//                            overlayEntries = overlayEntries
-//                        )
+
+                        var showingSaveDialog by remember { mutableStateOf(true) }
+
+                        Box() {
+                            if (showingSaveDialog) {
+                                SaveOverlayDialog(
+                                    info = applicationInfo,
+                                    onDismiss = { showingSaveDialog = false },
+                                    overlayEntries = listOf(
+                                        FabricatedOverlayEntry(
+                                            resourceName = "com.android.systemui:integer/quick_settings_num_columns",
+                                            resourceType = TypedValue.TYPE_DIMENSION,
+                                            resourceValue = 3
+                                        )
+                                    )
+                                )
+                            }
+                            RegisteredOverlayItem(
+                                info = OverlayInfo(
+                                    packageName = "com.android.shell",
+                                    isFabricated = true,
+                                    baseCodePath = "/data/resource-cache/com.android.shell-com.strangerweather.rootlessuimods.com.android.systemui.test-oBfs.frro",
+                                    category = null,
+                                    isMutable = true,
+                                    overlayName = "com.strangerweather.rootlessuimods.com.android.systemui.test",
+                                    priority = 2147483647,
+                                    state = 2,
+                                    targetOverlayableName = "",
+                                    targetPackageName = "com.android.systemui",
+                                    userId = 0
+                                ), onChange = {println("Changed!")}
+                            )
+                        }
                     }
                 }
             }
         }
     }
-
-    @Composable
-    fun ShowShizukuDialog() {
-        AlertDialog(modifier = Modifier.width(200.dp),
-            title = { Text(stringResource(id = R.string.shizuku_needed_title)) },
-            text = { Text(stringResource(id = R.string.shizuku_needed_text)) },
-            buttons = {},
-            onDismissRequest = {})
-    }
 }
+
 
 @Composable
-fun SaveOverlay(
-    context: Context,
-    info: ApplicationInfo,
-    overlayEntries: List<FabricatedOverlayEntry>
-) {
-    val name by remember { mutableStateOf("") }
-
-    TextButton(
-        onClick = {
-            OverlayAPI.getInstance(context) { api ->
-                api.registerFabricatedOverlay(
-                    FabricatedOverlay(
-                        "${context.packageName}.${info.packageName}.${name}",
-                        info.packageName
-                    ).apply {
-                        overlayEntries.forEach { overlay ->
-                            entries[overlay.resourceName] = overlay
-                        }
-                    }
-                )
-            }
-        }) { Text("Save") }
+fun ShowShizukuDialog() {
+    AlertDialog(modifier = Modifier.width(200.dp),
+        title = { Text(stringResource(id = R.string.shizuku_needed_title)) },
+        text = { Text(stringResource(id = R.string.shizuku_needed_text)) },
+        buttons = {},
+        onDismissRequest = {})
 }
 
-//adb shell sh /storage/emulated/0/Android/data/moe.shizuku.privileged.api/start.sh
+
+//        packageName = "com.android.shell",
+//        isFabricated = true,
+//        baseCodePath = "/data/resource-cache/com.android.shell-com.strangerweather.rootlessuimods.com.android.systemui.test-oBfs.frro",
+//        category = null,
+//        isMutable = true,
+//        overlayName = "com.strangerweather.rootlessuimods.com.android.systemui.test",
+//        priority = 2147483647,
+//        state = 2,
+//        targetOverlayableName = "",
+//        targetPackageName = "com.android.systemui",
+//        userId = 0
+
+
+//        println("packageName =${info.packageName}")
+//        println("isFabricated = ${info.isFabricated}")
+//        println("BCP = ${info.baseCodePath}")
+//        println("category = ${info.category}")
+//        println("isMutable = ${info.isMutable}")
+//        println("overlayName = ${info.overlayName}")
+//        println("priority = ${info.priority}")
+//        println("state =${info.state}")
+//        println("TON = ${info.targetOverlayableName}")
+//        println("TPN = ${info.targetPackageName}")
+//        println("UserId =${info.userId}")
+
+
+//.\adb shell sh /storage/emulated/0/Android/data/moe.shizuku.privileged.api/start.sh
