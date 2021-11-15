@@ -17,6 +17,7 @@ import androidx.compose.ui.unit.dp
 import com.strangerweather.rootlessuimods.ui.theme.RootlessUIModsTheme
 import org.lsposed.hiddenapibypass.HiddenApiBypass
 import tk.zwander.fabricateoverlay.*
+import java.util.function.Consumer
 
 
 class MainActivity : ComponentActivity() {
@@ -36,38 +37,73 @@ class MainActivity : ComponentActivity() {
                     //TODO: add permission dialog
                     if (ShizukuUtils.hasShizukuPermission(this)) {
 
-                        var showingSaveDialog by remember { mutableStateOf(true) }
+                        val context = LocalContext.current
+                        val info = applicationInfo
 
-                        Box() {
-                            if (showingSaveDialog) {
-                                SaveOverlayDialog(
-                                    info = applicationInfo,
-                                    onDismiss = { showingSaveDialog = false },
-                                    overlayEntries = listOf(
-                                        FabricatedOverlayEntry(
-                                            resourceName = "com.android.systemui:integer/quick_settings_num_columns",
-                                            resourceType = TypedValue.TYPE_DIMENSION,
-                                            resourceValue = 3
-                                        )
-                                    )
-                                )
-                            }
-                            RegisteredOverlayItem(
-                                info = OverlayInfo(
-                                    packageName = "com.android.shell",
-                                    isFabricated = true,
-                                    baseCodePath = "/data/resource-cache/com.android.shell-com.strangerweather.rootlessuimods.com.android.systemui.test-oBfs.frro",
-                                    category = null,
-                                    isMutable = true,
-                                    overlayName = "com.strangerweather.rootlessuimods.com.android.systemui.test",
-                                    priority = 2147483647,
-                                    state = 2,
-                                    targetOverlayableName = "",
-                                    targetPackageName = "com.android.systemui",
-                                    userId = 0
-                                ), onChange = {println("Changed!")}
+                        val overlayEntries = listOf(
+                            FabricatedOverlayEntry(
+                                resourceName = "com.android.systemui:integer/quick_settings_num_columns",
+                                resourceType = 16,
+                                resourceValue = 3
+                            )
+                        )
+
+
+                        OverlayAPI.getInstance(context) { api ->
+                            api.registerFabricatedOverlay(
+                                FabricatedOverlay(
+                                    "com.strangerweather.rootlessuimods.com.android.systemui.test",
+                                    "com.android.systemui"
+                                ).apply {
+                                    overlayEntries.forEach { overlay ->
+                                        entries[overlay.resourceName] = overlay
+                                    }
+                                }
                             )
                         }
+
+                        OverlayAPI.getInstance(context) { api ->
+                            api.setEnabled(
+                                FabricatedOverlay.generateOverlayIdentifier(
+                                    "com.strangerweather.rootlessuimods.com.android.systemui.test",
+                                    "com.android.shell"
+                                ), info.enabled, 0
+                            )
+                        }
+
+
+//                        var showingSaveDialog by remember { mutableStateOf(true) }
+
+//                        Box() {
+//                            if (showingSaveDialog) {
+//                                SaveOverlayDialog(
+//                                    info = applicationInfo,
+//                                    onDismiss = { showingSaveDialog = false },
+//                                    overlayEntries = listOf(
+//                                        FabricatedOverlayEntry(
+//                                            resourceName = "com.android.systemui:integer/quick_settings_num_columns",
+//                                            resourceType = TypedValue.TYPE_DIMENSION,
+//                                            resourceValue = 3
+//                                        )
+//                                    )
+//                                )
+//                            }
+//                            RegisteredOverlayItem(
+//                                info = OverlayInfo(
+//                                    packageName = "com.android.shell",
+//                                    isFabricated = true,
+//                                    baseCodePath = "/data/resource-cache/com.android.shell-com.strangerweather.rootlessuimods.com.android.systemui.test-oBfs.frro",
+//                                    category = null,
+//                                    isMutable = true,
+//                                    overlayName = "com.strangerweather.rootlessuimods.com.android.systemui.test",
+//                                    priority = 2147483647,
+//                                    state = 2,
+//                                    targetOverlayableName = "",
+//                                    targetPackageName = "com.android.systemui",
+//                                    userId = 0
+//                                ), onChange = {println("Changed!")}
+//                            )
+//                        }
                     }
                 }
             }
