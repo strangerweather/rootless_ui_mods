@@ -1,12 +1,13 @@
 package com.strangerweather.rootlessuimods
 
 import android.content.Context
+import android.content.pm.ApplicationInfo
 import android.graphics.ColorSpace
 import android.os.Bundle
 import android.util.TypedValue
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
@@ -42,7 +43,8 @@ class MainActivity : ComponentActivity() {
                     if (ShizukuUtils.hasShizukuPermission(this)) {
 
                         val context = LocalContext.current
-                        systemMods(context = context)
+                        HomePageButtons(context = context, info = applicationInfo)
+
 //                        systemUiMods(context = context)
 
 //                        val overlayEntries = listOf(
@@ -140,46 +142,57 @@ class MainActivity : ComponentActivity() {
 //            }
 //        }
 //    }
+}
 
-
-    private fun systemMods(context: Context) = runBlocking { // this: CoroutineScope
-        launch { // launch a new coroutine and continue
-            delay(3000L)
-
-            val info = applicationInfo
-
-            val overlayEntries = listOf(
-                FabricatedOverlayEntry(
-                    resourceName = "android:color/system_neutral1_50",
-                    resourceType = 28,
-                    resourceValue = 11766015
-                )
-            )// non-blocking delay for 1 second (default time unit is ms)
-            OverlayAPI.getInstance(context) { api ->
-                api.registerFabricatedOverlay(
-                    FabricatedOverlay(
-                        "com.strangerweather.rootlessuimods.android.test4",
-                        "android"
-                    ).apply {
-                        overlayEntries.forEach { overlay ->
-                            entries[overlay.resourceName] = overlay
-                        }
-                    }
-                )
+fun registerLayer(context: Context) {
+    val overlayEntries = listOf(
+        FabricatedOverlayEntry(
+            resourceName = "android:color/system_neutral1_50",
+            resourceType = 28,
+            resourceValue = 11766015
+        )
+    )
+    OverlayAPI.getInstance(context) { api ->
+        api.registerFabricatedOverlay(
+            FabricatedOverlay(
+                "com.strangerweather.rootlessuimods.android.test4",
+                "android"
+            ).apply {
+                overlayEntries.forEach { overlay ->
+                    entries[overlay.resourceName] = overlay
+                }
             }
+        )
+    }
+}
 
-            OverlayAPI.getInstance(context) { api ->
-                api.setEnabled(
-                    FabricatedOverlay.generateOverlayIdentifier(
-                        "com.strangerweather.rootlessuimods.android.test4",
-                        "com.android.shell"
-                    ), info.enabled, 0
-                )
-            }
+fun enableLayer(context: Context, info: ApplicationInfo) {
+    OverlayAPI.getInstance(context) { api ->
+        api.setEnabled(
+            FabricatedOverlay.generateOverlayIdentifier(
+                "com.strangerweather.rootlessuimods.android.test4",
+                "com.android.shell"
+            ), info.enabled, 0
+        )
+    }
+}
 
-            println("World!") // print after delay
+
+@Composable
+fun HomePageButtons(context: Context, info: ApplicationInfo) {
+    Row(
+        Modifier
+            .padding(top = 100.dp)
+            .fillMaxWidth(),
+        horizontalArrangement = Arrangement.Center
+    ) {
+        Button(onClick = { registerLayer(context) }) {
+            Text(text = "Register")
         }
-        println("Hello")
+        Spacer(modifier = Modifier.width(30.dp))
+        Button(onClick = { enableLayer(context, info) }) {
+            Text(text = "Enable")
+        }
     }
 }
 
