@@ -34,7 +34,6 @@ class MainActivity : ComponentActivity() {
             RootlessUIModsTheme {
                 Surface(color = MaterialTheme.colors.background) {
 
-
                     if (!ShizukuUtils.shizukuAvailable) {
                         ShowShizukuDialog()
                     }
@@ -46,114 +45,22 @@ class MainActivity : ComponentActivity() {
                         HomePageButtons(
                             context = context,
                             info = applicationInfo,
-                            name = "neutral_again",
-                            target = "android" // if system type "android", else if systemui type "com.android.systemui"
+                            name = "notification",
+                            target = "com.android.systemui"
+                            // if system type "android", else if systemui type "com.android.systemui"
                         )
-
-//                        systemUiMods(context = context)
-
-//                        val overlayEntries = listOf(
-//                            FabricatedOverlayEntry(
-//                                resourceName = "com.android.systemui:integer/quick_settings_num_columns",
-//                                resourceType = TypedValue.TYPE_INT_DEC,
-//                                resourceValue = 3
-//                            )
-//                        )
-//
-//                        val overlayEntries = listOf(
-//                            FabricatedOverlayEntry(
-//                                resourceName = "android:dimen/navigation_bar_frame_height",
-//                                resourceType = TypedValue.COMPLEX_UNIT_DIP,
-//                                resourceValue = 0
-//                            )
-//                        )
-
-//                        val overlayEntries = listOf(
-//                            FabricatedOverlayEntry(
-//                                resourceName = "android:dimen/navigation_bar_height",
-//                                resourceType = TypedValue.COMPLEX_UNIT_DIP,
-//                                resourceValue = 0
-//                            )
-//                        )
-//
-//
-//                        // For com.android.systemui
-//                        OverlayAPI.getInstance(context) { api ->
-//                            api.registerFabricatedOverlay(
-//                                FabricatedOverlay(
-//                                    "com.strangerweather.rootlessuimods.com.android.systemui.test",
-//                                    "com.android.systemui"
-//                                ).apply {
-//                                    overlayEntries.forEach { overlay ->
-//                                        entries[overlay.resourceName] = overlay
-//                                    }
-//                                }
-//                            )
-//                        }
-//
-//                        OverlayAPI.getInstance(context) { api ->
-//                            api.setEnabled(
-//                                FabricatedOverlay.generateOverlayIdentifier(
-//                                    "com.strangerweather.rootlessuimods.com.android.systemui.test",
-//                                    "com.android.shell"
-//                                ), info.enabled, 0
-//                            )
-//                        }
-//                    }
-//                }
-
-                        // For android (system)
-
-
                     }
                 }
             }
         }
     }
-
-//    private fun systemUiMods(context: Context) = runBlocking { // this: CoroutineScope
-//        launch { // launch a new coroutine and continue
-//            delay(3000L)
-//
-//            val info = applicationInfo
-//
-//            val overlayEntries = listOf(
-//                FabricatedOverlayEntry(
-//                    resourceName = "com.android.systemui:color/accent_material_light",
-//                    resourceType = TypedValue.TYPE_INT_COLOR_ARGB8,
-//                    resourceValue = 11766015
-//                )
-//            )
-//            OverlayAPI.getInstance(context) { api ->
-//                api.registerFabricatedOverlay(
-//                    FabricatedOverlay(
-//                        "com.strangerweather.rootlessuimods.com.android.systemui.ml",
-//                        "com.android.systemui"
-//                    ).apply {
-//                        overlayEntries.forEach { overlay ->
-//                            entries[overlay.resourceName] = overlay
-//                        }
-//                    }
-//                )
-//            }
-//
-//            OverlayAPI.getInstance(context) { api ->
-//                api.setEnabled(
-//                    FabricatedOverlay.generateOverlayIdentifier(
-//                        "com.strangerweather.rootlessuimods.com.android.systemui.ml",
-//                        "com.android.shell"
-//                    ), info.enabled, 0
-//                )
-//            }
-//        }
-//    }
 }
 
 fun registerLayer(context: Context, name: String, target: String) {
     val overlayEntries = listOf(
         FabricatedOverlayEntry(
-            resourceName = "$target:color/system_neutral1_50",
-            resourceType = 28,
+            resourceName = "$target:color/notification_panel_solid_background",
+            resourceType = TypedValue.TYPE_INT_COLOR_ARGB8,
             resourceValue = 3093151
         )
     )
@@ -299,3 +206,94 @@ fun ShowShizukuDialog() {
 //Create an overlay from a single resource. Caller must be root. Example:
 //fabricate --target android --name LighterGray \
 //android:color/lighter_gray 0x1c 0xffeeeeee
+
+
+//                        systemUiMods(context = context)
+
+//                        val overlayEntries = listOf(
+//                            FabricatedOverlayEntry(
+//                                resourceName = "com.android.systemui:integer/quick_settings_num_columns",
+//                                resourceType = TypedValue.TYPE_INT_DEC,
+//                                resourceValue = 3
+//                            )
+//                        )
+//
+//                        val overlayEntries = listOf(
+//                            FabricatedOverlayEntry(
+//                                resourceName = "android:dimen/navigation_bar_frame_height",
+//                                resourceType = TypedValue.COMPLEX_UNIT_DIP,
+//                                resourceValue = 0
+//                            )
+//                        )
+
+//                        val overlayEntries = listOf(
+//                            FabricatedOverlayEntry(
+//                                resourceName = "android:dimen/navigation_bar_height",
+//                                resourceType = TypedValue.COMPLEX_UNIT_DIP,
+//                                resourceValue = 0
+//                            )
+//                        )
+//
+//
+//                        // For com.android.systemui
+//                        OverlayAPI.getInstance(context) { api ->
+//                            api.registerFabricatedOverlay(
+//                                FabricatedOverlay(
+//                                    "com.strangerweather.rootlessuimods.com.android.systemui.test",
+//                                    "com.android.systemui"
+//                                ).apply {
+//                                    overlayEntries.forEach { overlay ->
+//                                        entries[overlay.resourceName] = overlay
+//                                    }
+//                                }
+//                            )
+//                        }
+//
+//                        OverlayAPI.getInstance(context) { api ->
+//                            api.setEnabled(
+//                                FabricatedOverlay.generateOverlayIdentifier(
+//                                    "com.strangerweather.rootlessuimods.com.android.systemui.test",
+//                                    "com.android.shell"
+//                                ), info.enabled, 0
+//                            )
+//                        }
+//                    }
+//                }
+
+// For android (system)
+//    private fun systemUiMods(context: Context) = runBlocking { // this: CoroutineScope
+//        launch { // launch a new coroutine and continue
+//            delay(3000L)
+//
+//            val info = applicationInfo
+//
+//            val overlayEntries = listOf(
+//                FabricatedOverlayEntry(
+//                    resourceName = "com.android.systemui:color/accent_material_light",
+//                    resourceType = TypedValue.TYPE_INT_COLOR_ARGB8,
+//                    resourceValue = 11766015
+//                )
+//            )
+//            OverlayAPI.getInstance(context) { api ->
+//                api.registerFabricatedOverlay(
+//                    FabricatedOverlay(
+//                        "com.strangerweather.rootlessuimods.com.android.systemui.ml",
+//                        "com.android.systemui"
+//                    ).apply {
+//                        overlayEntries.forEach { overlay ->
+//                            entries[overlay.resourceName] = overlay
+//                        }
+//                    }
+//                )
+//            }
+//
+//            OverlayAPI.getInstance(context) { api ->
+//                api.setEnabled(
+//                    FabricatedOverlay.generateOverlayIdentifier(
+//                        "com.strangerweather.rootlessuimods.com.android.systemui.ml",
+//                        "com.android.shell"
+//                    ), info.enabled, 0
+//                )
+//            }
+//        }
+//    }
