@@ -155,7 +155,7 @@ fun registerLayer(context: Context) {
     OverlayAPI.getInstance(context) { api ->
         api.registerFabricatedOverlay(
             FabricatedOverlay(
-                "com.strangerweather.rootlessuimods.android.test4",
+                "com.strangerweather.rootlessuimods.android.test23",
                 "android"
             ).apply {
                 overlayEntries.forEach { overlay ->
@@ -170,9 +170,20 @@ fun enableLayer(context: Context, info: ApplicationInfo) {
     OverlayAPI.getInstance(context) { api ->
         api.setEnabled(
             FabricatedOverlay.generateOverlayIdentifier(
-                "com.strangerweather.rootlessuimods.android.test4",
+                "com.strangerweather.rootlessuimods.android.test23",
                 "com.android.shell"
             ), info.enabled, 0
+        )
+    }
+}
+
+fun disableLayer(context: Context, info: ApplicationInfo) {
+    OverlayAPI.getInstance(context) { api ->
+        api.setEnabled(
+            FabricatedOverlay.generateOverlayIdentifier(
+                "com.strangerweather.rootlessuimods.android.test23",
+                "com.android.shell"
+            ), !info.enabled, 0
         )
     }
 }
@@ -192,6 +203,10 @@ fun HomePageButtons(context: Context, info: ApplicationInfo) {
         Spacer(modifier = Modifier.width(30.dp))
         Button(onClick = { enableLayer(context, info) }) {
             Text(text = "Enable")
+        }
+        Spacer(modifier = Modifier.width(30.dp))
+        Button(onClick = { disableLayer(context, info) }) {
+            Text(text = "Disable")
         }
     }
 }
