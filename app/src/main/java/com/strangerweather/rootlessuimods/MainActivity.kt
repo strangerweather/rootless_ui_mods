@@ -43,7 +43,12 @@ class MainActivity : ComponentActivity() {
                     if (ShizukuUtils.hasShizukuPermission(this)) {
 
                         val context = LocalContext.current
-                        HomePageButtons(context = context, info = applicationInfo)
+                        HomePageButtons(
+                            context = context,
+                            info = applicationInfo,
+                            name = "neutral_again",
+                            target = "android" // if system type "android", else if systemui type "com.android.systemui"
+                        )
 
 //                        systemUiMods(context = context)
 
@@ -144,19 +149,19 @@ class MainActivity : ComponentActivity() {
 //    }
 }
 
-fun registerLayer(context: Context) {
+fun registerLayer(context: Context, name: String, target: String) {
     val overlayEntries = listOf(
         FabricatedOverlayEntry(
-            resourceName = "android:color/system_neutral1_50",
+            resourceName = "$target:color/system_neutral1_50",
             resourceType = 28,
-            resourceValue = 11766015
+            resourceValue = 3093151
         )
     )
     OverlayAPI.getInstance(context) { api ->
         api.registerFabricatedOverlay(
             FabricatedOverlay(
-                "com.strangerweather.rootlessuimods.android.test23",
-                "android"
+                "com.strangerweather.rootlessuimods.$target.$name",
+                target
             ).apply {
                 overlayEntries.forEach { overlay ->
                     entries[overlay.resourceName] = overlay
@@ -166,22 +171,22 @@ fun registerLayer(context: Context) {
     }
 }
 
-fun enableLayer(context: Context, info: ApplicationInfo) {
+fun enableLayer(context: Context, info: ApplicationInfo, name: String, target: String) {
     OverlayAPI.getInstance(context) { api ->
         api.setEnabled(
             FabricatedOverlay.generateOverlayIdentifier(
-                "com.strangerweather.rootlessuimods.android.test23",
+                "com.strangerweather.rootlessuimods.$target.$name",
                 "com.android.shell"
             ), info.enabled, 0
         )
     }
 }
 
-fun disableLayer(context: Context, info: ApplicationInfo) {
+fun disableLayer(context: Context, info: ApplicationInfo, name: String, target: String) {
     OverlayAPI.getInstance(context) { api ->
         api.setEnabled(
             FabricatedOverlay.generateOverlayIdentifier(
-                "com.strangerweather.rootlessuimods.android.test23",
+                "com.strangerweather.rootlessuimods.$target.$name",
                 "com.android.shell"
             ), !info.enabled, 0
         )
@@ -190,22 +195,22 @@ fun disableLayer(context: Context, info: ApplicationInfo) {
 
 
 @Composable
-fun HomePageButtons(context: Context, info: ApplicationInfo) {
+fun HomePageButtons(context: Context, info: ApplicationInfo, name: String, target: String) {
     Row(
         Modifier
             .padding(top = 100.dp)
             .fillMaxWidth(),
         horizontalArrangement = Arrangement.Center
     ) {
-        Button(onClick = { registerLayer(context) }) {
+        Button(onClick = { registerLayer(context, name, target) }) {
             Text(text = "Register")
         }
         Spacer(modifier = Modifier.width(30.dp))
-        Button(onClick = { enableLayer(context, info) }) {
+        Button(onClick = { enableLayer(context, info, name, target) }) {
             Text(text = "Enable")
         }
         Spacer(modifier = Modifier.width(30.dp))
-        Button(onClick = { disableLayer(context, info) }) {
+        Button(onClick = { disableLayer(context, info, name, target) }) {
             Text(text = "Disable")
         }
     }
