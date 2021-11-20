@@ -6,7 +6,6 @@ import android.os.Bundle
 import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.Button
 import androidx.compose.material.MaterialTheme
@@ -21,7 +20,6 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 import org.lsposed.hiddenapibypass.HiddenApiBypass
-import rikka.shizuku.ShizukuProvider
 import tk.zwander.fabricateoverlay.FabricatedOverlay
 import tk.zwander.fabricateoverlay.FabricatedOverlayEntry
 import tk.zwander.fabricateoverlay.OverlayAPI
@@ -40,23 +38,19 @@ class MainActivity : ComponentActivity() {
         if (ShizukuUtils.hasShizukuPermission(this)) {
             setAppContent()
         } else {
-            requestShizukuPermission.launch(ShizukuProvider.PERMISSION)
-        }
-    }
-
-
-    private val requestShizukuPermission = registerForActivityResult(
-        ActivityResultContracts.RequestPermission()
-    ) { isGranted: Boolean ->
-        if (isGranted) {
-            setAppContent()
-        } else {
-            runBlocking {
-                launch {
-                    delay(3000L)
-                    finish()
+            ShizukuUtils.requestShizukuPermission(this) { granted ->
+                if (granted) {
+                    setAppContent()
+                } else {
+                    runBlocking {
+                        launch {
+                            delay(3000L)
+                            finish()
+                        }
+                        Toast.makeText(applicationContext, "Too bad, exiting!", Toast.LENGTH_LONG)
+                            .show()
+                    }
                 }
-                Toast.makeText(applicationContext, "Too bad, exiting!", Toast.LENGTH_SHORT).show()
             }
         }
     }
@@ -138,7 +132,6 @@ class MainActivity : ComponentActivity() {
             horizontalArrangement = Arrangement.Center
         ) {
             Button(onClick = {
-                requestShizukuPermission.launch(ShizukuProvider.PERMISSION)
                 registerLayer(context, name, target)
             }) {
                 Text(text = "Register")
