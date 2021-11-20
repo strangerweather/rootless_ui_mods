@@ -14,9 +14,13 @@ import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.ExperimentalGraphicsApi
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.strangerweather.rootlessuimods.ui.theme.RootlessUIModsTheme
+import com.strangerweather.rootlessuimods.utils.ColorPicker
+import com.strangerweather.rootlessuimods.utils.registerLayer
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
@@ -27,6 +31,7 @@ import tk.zwander.fabricateoverlay.OverlayAPI
 import tk.zwander.fabricateoverlay.ShizukuUtils
 
 
+@ExperimentalGraphicsApi
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -70,44 +75,29 @@ class MainActivity : ComponentActivity() {
     }
 
 
+    @ExperimentalGraphicsApi
     private fun setAppContent() {
         setContent {
             RootlessUIModsTheme {
                 Surface(color = MaterialTheme.colors.background) {
                     val context = LocalContext.current
-                    HomePageButtons(
-                        context = context,
-                        info = applicationInfo,
-                        name = "accent1100_6",
-                        target = "android"
-                    )
+                    Column {
+                        ColorPicker()
+                        Spacer(modifier = Modifier.height(30.dp))
+                        HomePageButtons(
+                            context = context,
+                            info = applicationInfo,
+                            name = "accent1100_6",
+                            target = "android"
+                        )
+                    }
                 }
             }
         }
     }
 
 
-    private fun registerLayer(context: Context, name: String, target: String) {
-        val overlayEntries = listOf(
-            FabricatedOverlayEntry(
-                resourceName = "$target:color/system_accent1_100",
-                resourceType = 28,
-                resourceValue = -2001105
-            )
-        )
-        OverlayAPI.getInstance(context) { api ->
-            api.registerFabricatedOverlay(
-                FabricatedOverlay(
-                    "com.strangerweather.rootlessuimods.$target.$name",
-                    target
-                ).apply {
-                    overlayEntries.forEach { overlay ->
-                        entries[overlay.resourceName] = overlay
-                    }
-                }
-            )
-        }
-    }
+
 
     private fun enableLayer(context: Context, info: ApplicationInfo, name: String, target: String) {
         OverlayAPI.getInstance(context) { api ->
@@ -145,18 +135,16 @@ class MainActivity : ComponentActivity() {
                 .fillMaxWidth(),
             horizontalArrangement = Arrangement.Center
         ) {
-            Button(onClick = {
-                registerLayer(context, name, target)
-            }) {
-                Text(text = "Register")
+            Button(onClick = { registerLayer(context, name, target) }) {
+                Text(text = stringResource(id = R.string.add))
             }
             Spacer(modifier = Modifier.width(30.dp))
             Button(onClick = { enableLayer(context, info, name, target) }) {
-                Text(text = "Enable")
+                Text(text = stringResource(id = R.string.apply))
             }
             Spacer(modifier = Modifier.width(30.dp))
             Button(onClick = { disableLayer(context, info, name, target) }) {
-                Text(text = "Disable")
+                Text(text = stringResource(id = R.string.remove))
             }
         }
     }

@@ -66,6 +66,8 @@ dependencies {
 
     implementation 'com.github.zacharee:FabricateOverlay:master'
 
+    implementation 'com.godaddy.android.colorpicker:compose-color-picker-android:0.2.1'
+
     testImplementation 'junit:junit:4.+'
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
