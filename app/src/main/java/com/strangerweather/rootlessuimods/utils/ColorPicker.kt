@@ -23,7 +23,7 @@ import tk.zwander.fabricateoverlay.FabricatedOverlayEntry
 import tk.zwander.fabricateoverlay.OverlayAPI
 
 
-var resourceValue = mutableStateOf(Int.MIN_VALUE)
+var resourceValue = mutableStateOf(-65536)
 
 @ExperimentalGraphicsApi
 @Composable
