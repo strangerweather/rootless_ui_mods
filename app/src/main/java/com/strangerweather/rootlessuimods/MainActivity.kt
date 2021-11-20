@@ -45,8 +45,8 @@ class MainActivity : ComponentActivity() {
                         HomePageButtons(
                             context = context,
                             info = applicationInfo,
-                            name = "notification",
-                            target = "com.android.systemui"
+                            name = "accent1100_6",
+                            target = "android"
                             // if system type "android", else if systemui type "com.android.systemui"
                         )
                     }
@@ -59,9 +59,9 @@ class MainActivity : ComponentActivity() {
 fun registerLayer(context: Context, name: String, target: String) {
     val overlayEntries = listOf(
         FabricatedOverlayEntry(
-            resourceName = "$target:color/notification_panel_solid_background",
-            resourceType = TypedValue.TYPE_INT_COLOR_ARGB8,
-            resourceValue = 3093151
+            resourceName = "$target:color/system_accent1_100",
+            resourceType = 28,
+            resourceValue = -2001105
         )
     )
     OverlayAPI.getInstance(context) { api ->
