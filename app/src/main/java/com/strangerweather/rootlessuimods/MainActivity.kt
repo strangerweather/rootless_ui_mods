@@ -1,5 +1,6 @@
 package com.strangerweather.rootlessuimods
 
+import android.app.AlertDialog
 import android.content.Context
 import android.content.pm.ApplicationInfo
 import android.os.Bundle
@@ -31,28 +32,41 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         HiddenApiBypass.setHiddenApiExemptions("L")
 
-        if (!ShizukuUtils.shizukuAvailable) {
-//            showShizukuDialog()
-        }
-
-        if (ShizukuUtils.hasShizukuPermission(this)) {
-            setAppContent()
-        } else {
-            ShizukuUtils.requestShizukuPermission(this) { granted ->
-                if (granted) {
-                    setAppContent()
-                } else {
-                    runBlocking {
-                        launch {
-                            delay(3000L)
-                            finish()
+        if (ShizukuUtils.shizukuAvailable) {
+            if (ShizukuUtils.hasShizukuPermission(this)) {
+                setAppContent()
+            } else {
+                ShizukuUtils.requestShizukuPermission(this) { granted ->
+                    if (granted) {
+                        setAppContent()
+                    } else {
+                        runBlocking {
+                            launch {
+                                delay(3000L)
+                                finish()
+                            }
+                            Toast.makeText(
+                                applicationContext,
+                                "Too bad, exiting!",
+                                Toast.LENGTH_LONG
+                            )
+                                .show()
                         }
-                        Toast.makeText(applicationContext, "Too bad, exiting!", Toast.LENGTH_LONG)
-                            .show()
                     }
                 }
             }
+        } else {
+            showShizukuDialog(this)
         }
+    }
+
+    private fun showShizukuDialog(context: Context) {
+        val builder = AlertDialog.Builder(context)
+        builder.setTitle(R.string.shizuku_needed_title)
+            .setMessage(R.string.shizuku_needed_text)
+            .setCancelable(false)
+            .create()
+            .show()
     }
 
 
