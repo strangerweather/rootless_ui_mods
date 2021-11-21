@@ -13,6 +13,7 @@ import com.google.accompanist.pager.ExperimentalPagerApi
 import com.google.accompanist.pager.HorizontalPager
 import com.google.accompanist.pager.PagerState
 import com.google.accompanist.pager.rememberPagerState
+import com.strangerweather.rootlessuimods.components.tabs.Tab1
 import kotlinx.coroutines.launch
 
 @ExperimentalPagerApi
@@ -31,7 +32,7 @@ fun TabScreen() {
 fun TabsContent(pagerState: PagerState) {
     HorizontalPager(state = pagerState, count = 3) { page ->
         when (page) {
-            0 -> Text(text = "Screen 1")
+            0 -> Tab1()
             1 -> Text(text = "Screen 2")
             2 -> Text(text = "Screen 3")
         }
