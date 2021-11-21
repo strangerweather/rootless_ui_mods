@@ -84,9 +84,8 @@ class MainActivity : ComponentActivity() {
                         content = {
                             Column(Modifier.fillMaxSize()) {
                                 TabScreen()
-                                BasicContent()
+//                                BasicContent()
                             }
-
                         }
                     )
                 }

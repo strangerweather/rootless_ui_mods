@@ -5,6 +5,7 @@
     <string name="to_remove">To Remove</string>
     <string name="apply">Apply</string>
     <string name="add">Add</string>
+    <string name="activate">Activate</string>
     <string name="shizuku_needed_title">Shizuku App Needed</string>
     <string name="shizuku_needed_text">You need to install the Shizuku app from the PlayStore and start it using ADB.</string>
     <string name="tab1_explanation">This mod allows you to replace Material You colors with the color of your choice.</string>

@@ -1,5 +1,7 @@
 package com.strangerweather.rootlessuimods.components
 
+import android.content.Context
+import android.content.pm.ApplicationInfo
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
@@ -14,10 +16,11 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.strangerweather.rootlessuimods.R
+import com.strangerweather.rootlessuimods.functions.enableLayer
 import com.strangerweather.rootlessuimods.ui.theme.Purple500
 
 @Composable
-fun BasicContent() {
+fun BasicContent(context: Context, info: ApplicationInfo, name: String, target: String) {
     LazyColumn(
         Modifier
             .fillMaxSize()
@@ -64,7 +67,7 @@ fun BasicContent() {
             Card(
                 Modifier
                     .fillMaxWidth()
-                    .height(150.dp)
+                    .height(200.dp)
                     .padding(10.dp), elevation = 7.dp
             ) {
                 Column(
@@ -78,6 +81,19 @@ fun BasicContent() {
                         )
                     )
                     Spacer(modifier = Modifier.height(20.dp))
+                    Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.Center) {
+                        OutlinedButton(
+                            onClick = {
+                                enableLayer(context, info, name, target)
+                            },
+                            Modifier
+                                .height(50.dp)
+                                .width(135.dp)
+                        ) {
+                            Text(text = stringResource(id = R.string.activate))
+                        }
+                    }
+
                 }
             }
         }
