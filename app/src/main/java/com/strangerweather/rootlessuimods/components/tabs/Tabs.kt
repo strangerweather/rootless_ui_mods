@@ -40,9 +40,7 @@ fun Tabs(tabTitle: String, tabText: String) {
                     .fillMaxSize()
             ) {
                 Text(
-                    text = tabTitle, style = TextStyle(
-                        Purple200, fontSize = 20.sp
-                    )
+                    text = tabTitle, style = TextStyle(fontSize = 20.sp)
                 )
                 Spacer(modifier = Modifier.height(10.dp))
                 Text(

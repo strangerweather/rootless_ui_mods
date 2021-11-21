@@ -14,8 +14,8 @@
     <string name="tab1_title">Accent Color Mod</string>
     <string name="tab2_title">Drawers Color Mod</string>
     <string name="tab3_title">Text Color Mod</string>
-    <string name="tab1_instr_1">1. Choose a Color</string>
-    <string name="tab1_instr_2">2. Apply</string>
+    <string name="tab1_instr_1">Choose a Color</string>
+    <string name="tab1_instr_2">Apply</string>
     <string name="color_picker">Color Picker</string>
     <string name="color_presets">Color Presets</string>
 </resources>

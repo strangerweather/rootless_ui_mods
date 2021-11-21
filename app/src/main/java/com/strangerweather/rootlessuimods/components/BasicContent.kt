@@ -18,6 +18,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.strangerweather.rootlessuimods.R
 import com.strangerweather.rootlessuimods.functions.enableLayer
+import com.strangerweather.rootlessuimods.ui.theme.LightGreen200
 import com.strangerweather.rootlessuimods.ui.theme.Purple200
 import com.strangerweather.rootlessuimods.ui.theme.Purple500
 
@@ -31,7 +32,7 @@ fun BasicContent() {
     LazyColumn(
         Modifier
             .fillMaxSize()
-            .background(if (isSystemInDarkTheme())Color.DarkGray else Color(0xFFF5F5F5))
+            .background(if (isSystemInDarkTheme()) Color.DarkGray else Color(0xFFF5F5F5))
     ) {
         item {
             Card(
@@ -43,14 +44,10 @@ fun BasicContent() {
                 Column(
                     Modifier
                         .padding(15.dp)
-                        .fillMaxSize()
+                        .fillMaxSize(),
+                    horizontalAlignment = Alignment.CenterHorizontally,
+                    verticalArrangement = Arrangement.Center
                 ) {
-                    Text(
-                        text = stringResource(id = R.string.tab1_instr_1), style = TextStyle(
-                            Purple200, fontSize = 20.sp
-                        )
-                    )
-                    Spacer(modifier = Modifier.height(20.dp))
                     Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween) {
                         OutlinedButton(
                             onClick = { },
@@ -80,16 +77,15 @@ fun BasicContent() {
                 Column(
                     Modifier
                         .padding(15.dp)
-                        .fillMaxSize()
+                        .fillMaxSize(),
+                    horizontalAlignment = Alignment.CenterHorizontally,
+                    verticalArrangement = Arrangement.Center
                 ) {
-                    Text(
-                        text = stringResource(id = R.string.tab1_instr_2), style = TextStyle(
-                            Purple200, fontSize = 20.sp
-                        )
-                    )
-                    Spacer(modifier = Modifier.height(20.dp))
-                    Row(Modifier.fillMaxWidth(),horizontalArrangement = Arrangement.Center ) {
-                        Column(Modifier.fillMaxWidth(), horizontalAlignment = Alignment.CenterHorizontally) {
+                    Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.Center) {
+                        Column(
+                            Modifier.fillMaxWidth(),
+                            horizontalAlignment = Alignment.CenterHorizontally
+                        ) {
                             OutlinedButton(
                                 onClick = {
                                     if (progress < 1f) progress += 0.1f
@@ -108,6 +104,28 @@ fun BasicContent() {
                     }
                 }
             }
+            Card(
+                Modifier
+                    .fillMaxWidth()
+                    .height(150.dp)
+                    .padding(10.dp), elevation = 7.dp
+            ) {
+                Column(
+                    Modifier.fillMaxSize(),
+                    horizontalAlignment = Alignment.CenterHorizontally,
+                    verticalArrangement = Arrangement.Center
+                ) {
+                    OutlinedButton(
+                        onClick = {},
+                        Modifier
+                            .height(50.dp)
+                            .width(135.dp)
+                    ) {
+                        Text(text = stringResource(id = R.string.remove))
+                    }
+                }
+            }
         }
     }
 }
+
