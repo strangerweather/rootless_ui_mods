@@ -84,12 +84,19 @@ class MainActivity : ComponentActivity() {
                             )
                         },
                         content = {
-                            HomePageButtons(
-                                context = context,
-                                info = applicationInfo,
-                                name = "accent1100_6",
-                                target = "android"
-                            )
+                            LazyColumn(
+                                modifier = Modifier.fillMaxHeight(),
+                                horizontalAlignment = Alignment.CenterHorizontally
+                            ) {
+                                item {
+                                    HomePageButtons(
+                                        context = context,
+                                        info = applicationInfo,
+                                        name = "accent1100_6",
+                                        target = "android"
+                                    )
+                                }
+                            }
                         }
                     )
                 }
