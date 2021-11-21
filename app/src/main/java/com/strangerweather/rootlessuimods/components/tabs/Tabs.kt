@@ -1,6 +1,7 @@
 package com.strangerweather.rootlessuimods.components.tabs
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.Card
@@ -14,6 +15,7 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.strangerweather.rootlessuimods.R
+import com.strangerweather.rootlessuimods.ui.theme.Purple200
 import com.strangerweather.rootlessuimods.ui.theme.Purple500
 
 
@@ -22,32 +24,32 @@ fun Tabs(tabTitle: String, tabText: String) {
     Column(
         Modifier
             .fillMaxSize()
-            .background(Color(0xFFF5F5F5))
+            .background(if (isSystemInDarkTheme()) Color.DarkGray else Color(0xFFF5F5F5))
     )
     {
 
-            Card(
+        Card(
+            Modifier
+                .fillMaxWidth()
+                .height(150.dp)
+                .padding(10.dp), elevation = 7.dp
+        ) {
+            Column(
                 Modifier
-                    .fillMaxWidth()
-                    .height(150.dp)
-                    .padding(10.dp), elevation = 7.dp
+                    .padding(15.dp)
+                    .fillMaxSize()
             ) {
-                Column(
-                    Modifier
-                        .padding(15.dp)
-                        .fillMaxSize()
-                ) {
-                    Text(
-                        text = tabTitle, style = TextStyle(
-                            Purple500, fontSize = 20.sp
-                        )
+                Text(
+                    text = tabTitle, style = TextStyle(
+                        Purple200, fontSize = 20.sp
                     )
-                    Spacer(modifier = Modifier.height(10.dp))
-                    Text(
-                        text = tabText,
-                    )
-                }
+                )
+                Spacer(modifier = Modifier.height(10.dp))
+                Text(
+                    text = tabText,
+                )
             }
         }
     }
+}
 

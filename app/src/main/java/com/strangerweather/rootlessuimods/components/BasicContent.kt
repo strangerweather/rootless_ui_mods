@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.pm.ApplicationInfo
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.foundation.background
+import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.*
@@ -17,11 +18,12 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.strangerweather.rootlessuimods.R
 import com.strangerweather.rootlessuimods.functions.enableLayer
+import com.strangerweather.rootlessuimods.ui.theme.Purple200
 import com.strangerweather.rootlessuimods.ui.theme.Purple500
 
 @Composable
 fun BasicContent() {
-    val progress by remember { mutableStateOf(0.1f) }
+    var progress by remember { mutableStateOf(0.1f) }
     val animatedProgress by animateFloatAsState(
         targetValue = progress,
         animationSpec = ProgressIndicatorDefaults.ProgressAnimationSpec
@@ -29,7 +31,7 @@ fun BasicContent() {
     LazyColumn(
         Modifier
             .fillMaxSize()
-            .background(Color(0xFFF5F5F5))
+            .background(if (isSystemInDarkTheme())Color.DarkGray else Color(0xFFF5F5F5))
     ) {
         item {
             Card(
@@ -45,7 +47,7 @@ fun BasicContent() {
                 ) {
                     Text(
                         text = stringResource(id = R.string.tab1_instr_1), style = TextStyle(
-                            Purple500, fontSize = 20.sp
+                            Purple200, fontSize = 20.sp
                         )
                     )
                     Spacer(modifier = Modifier.height(20.dp))
@@ -82,7 +84,7 @@ fun BasicContent() {
                 ) {
                     Text(
                         text = stringResource(id = R.string.tab1_instr_2), style = TextStyle(
-                            Purple500, fontSize = 20.sp
+                            Purple200, fontSize = 20.sp
                         )
                     )
                     Spacer(modifier = Modifier.height(20.dp))
@@ -90,6 +92,7 @@ fun BasicContent() {
                         Column(Modifier.fillMaxWidth(), horizontalAlignment = Alignment.CenterHorizontally) {
                             OutlinedButton(
                                 onClick = {
+                                    if (progress < 1f) progress += 0.1f
 //                                enableLayer(context, info, name, target)
                                 },
                                 Modifier
