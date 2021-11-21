@@ -7,8 +7,12 @@
     <string name="add">Add</string>
     <string name="shizuku_needed_title">Shizuku App Needed</string>
     <string name="shizuku_needed_text">You need to install the Shizuku app from the PlayStore and start it using ADB.</string>
-    <string name="tab1_explanation">This mod allows you to replace Material You colors with the color of your choice</string>
+    <string name="tab1_explanation">This mod allows you to replace Material You colors with the color of your choice.</string>
+    <string name="tab2_explanation">This mod allows you to change the background color of the notification and app drawers.</string>
+    <string name="tab3_explanation">This mod allows you to change the text color of the quick settings panel.</string>
     <string name="tab1_title">Accent Color Mod</string>
+    <string name="tab2_title">Drawers Color Mod</string>
+    <string name="tab3_title">Text Color Mod</string>
     <string name="tab1_instr_1">1. Choose a Color</string>
     <string name="tab1_instr_2">2. Apply</string>
     <string name="color_picker">Color Picker</string>

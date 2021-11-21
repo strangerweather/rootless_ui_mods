@@ -6,11 +6,15 @@ import android.os.Bundle
 import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.*
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.ExperimentalGraphicsApi
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import com.google.accompanist.pager.ExperimentalPagerApi
+import com.strangerweather.rootlessuimods.components.BasicContent
 import com.strangerweather.rootlessuimods.components.TabScreen
 import com.strangerweather.rootlessuimods.ui.theme.RootlessUIModsTheme
 import kotlinx.coroutines.delay
@@ -78,7 +82,11 @@ class MainActivity : ComponentActivity() {
                             )
                         },
                         content = {
-                            TabScreen()
+                            Column(Modifier.fillMaxSize()) {
+                                TabScreen()
+                                BasicContent()
+                            }
+
                         }
                     )
                 }
