@@ -2,13 +2,13 @@ package com.strangerweather.rootlessuimods.components
 
 import android.content.Context
 import android.content.pm.ApplicationInfo
+import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.material.Card
-import androidx.compose.material.OutlinedButton
-import androidx.compose.material.Text
-import androidx.compose.runtime.Composable
+import androidx.compose.material.*
+import androidx.compose.runtime.*
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
@@ -20,7 +20,12 @@ import com.strangerweather.rootlessuimods.functions.enableLayer
 import com.strangerweather.rootlessuimods.ui.theme.Purple500
 
 @Composable
-fun BasicContent(context: Context, info: ApplicationInfo, name: String, target: String) {
+fun BasicContent() {
+    val progress by remember { mutableStateOf(0.1f) }
+    val animatedProgress by animateFloatAsState(
+        targetValue = progress,
+        animationSpec = ProgressIndicatorDefaults.ProgressAnimationSpec
+    )
     LazyColumn(
         Modifier
             .fillMaxSize()
@@ -81,22 +86,25 @@ fun BasicContent(context: Context, info: ApplicationInfo, name: String, target: 
                         )
                     )
                     Spacer(modifier = Modifier.height(20.dp))
-                    Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.Center) {
-                        OutlinedButton(
-                            onClick = {
-                                enableLayer(context, info, name, target)
-                            },
-                            Modifier
-                                .height(50.dp)
-                                .width(135.dp)
-                        ) {
-                            Text(text = stringResource(id = R.string.activate))
+                    Row(Modifier.fillMaxWidth(),horizontalArrangement = Arrangement.Center ) {
+                        Column(Modifier.fillMaxWidth(), horizontalAlignment = Alignment.CenterHorizontally) {
+                            OutlinedButton(
+                                onClick = {
+//                                enableLayer(context, info, name, target)
+                                },
+                                Modifier
+                                    .height(50.dp)
+                                    .width(135.dp)
+                            ) {
+                                Text(text = stringResource(id = R.string.activate))
+                            }
+
+                            Spacer(modifier = Modifier.height(40.dp))
+                            LinearProgressIndicator(progress = animatedProgress)
                         }
                     }
-
                 }
             }
         }
     }
-
 }
