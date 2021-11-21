@@ -84,28 +84,13 @@ class MainActivity : ComponentActivity() {
                     Scaffold(
                         topBar = {
                             TopAppBar(
-                                title = { Text("Rootless UI Mods") },
+                                title = { Text("Rootless UI Color Mods") },
                             )
                         },
                         content = {
                             TabScreen()
-//                            LazyColumn(
-//                                modifier = Modifier.fillMaxHeight(),
-//                                horizontalAlignment = Alignment.CenterHorizontally
-//                            ) {
-//                                item {
-//                                    HomePageButtons(
-//                                        context = context,
-//                                        info = applicationInfo,
-//                                        name = "accent1100_6",
-//                                        target = "android"
-//                                    )
-//                                }
-//                            }
-//                        }
-//                    )
-//                }
-                        })
+                        }
+                    )
                 }
             }
         }

@@ -1,11 +1,12 @@
 package com.strangerweather.rootlessuimods.components
 
 import androidx.compose.foundation.layout.Column
-import androidx.compose.material.*
-import androidx.compose.material.TabRowDefaults.tabIndicatorOffset
+import androidx.compose.material.Tab
+import androidx.compose.material.TabRow
+import androidx.compose.material.TabRowDefaults
+import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.rememberCoroutineScope
-import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import com.google.accompanist.pager.ExperimentalPagerApi
@@ -40,7 +41,7 @@ fun TabsContent(pagerState: PagerState) {
 @ExperimentalPagerApi
 @Composable
 fun Tabs(pagerState: PagerState) {
-    val list = listOf("TAB1", "TAB2", "TAB3")
+    val list = listOf("Accent", "Drawers", "Text")
     val scope = rememberCoroutineScope()
 
     TabRow(selectedTabIndex = pagerState.currentPage, divider = {
