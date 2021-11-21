@@ -6,22 +6,13 @@ import android.os.Bundle
 import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxHeight
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.*
-import androidx.compose.ui.Alignment
-import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.ExperimentalGraphicsApi
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.unit.dp
+import androidx.compose.ui.res.stringResource
 import com.google.accompanist.pager.ExperimentalPagerApi
-import com.strangerweather.rootlessuimods.components.HomePageButtons
 import com.strangerweather.rootlessuimods.components.TabScreen
 import com.strangerweather.rootlessuimods.ui.theme.RootlessUIModsTheme
-import com.strangerweather.rootlessuimods.utils.ColorCircle
-import com.strangerweather.rootlessuimods.utils.ColorPicker
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
@@ -80,11 +71,10 @@ class MainActivity : ComponentActivity() {
         setContent {
             RootlessUIModsTheme {
                 Surface(color = MaterialTheme.colors.background) {
-                    val context = LocalContext.current
                     Scaffold(
                         topBar = {
                             TopAppBar(
-                                title = { Text("Rootless UI Color Mods") },
+                                title = { Text(stringResource(id = R.string.title)) },
                             )
                         },
                         content = {

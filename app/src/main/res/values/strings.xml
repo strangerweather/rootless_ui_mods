@@ -1,24 +1,9 @@
 <resources>
     <string name="app_name">Rootless UI Mods</string>
-
+    <string name="title">"Rootless UI Color Mods"</string>
     <string name="remove">Remove</string>
     <string name="apply">Apply</string>
-    <string name="cancel">Cancel</string>
-    <string name="value">Value</string>
     <string name="add">Add</string>
-    <string name="save">Save</string>
-    <string name="yes">Yes</string>
-    <string name="no">No</string>
-    <string name="resources">Resources</string>
-    <string name="enabled">Enabled</string>
-    <string name="search">Search</string>
-    <string name="overlays">Overlays</string>
-    <string name="apps">Apps</string>
-    <string name="close">Close</string>
-
-    <string name="please_enter_value">Please enter a value.</string>
-    <string name="overlay_name">Overlay Name.</string>
-    <string name="delete_confirmation">Are you sure you want to remove this overlay?</string>
     <string name="shizuku_needed_title">Shizuku App Needed</string>
     <string name="shizuku_needed_text">You need to install the Shizuku app from the PlayStore and start it using ADB.</string>
 </resources>
