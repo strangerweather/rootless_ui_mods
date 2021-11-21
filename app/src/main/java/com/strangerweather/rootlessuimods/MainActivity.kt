@@ -16,7 +16,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.ExperimentalGraphicsApi
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
+import com.google.accompanist.pager.ExperimentalPagerApi
 import com.strangerweather.rootlessuimods.components.HomePageButtons
+import com.strangerweather.rootlessuimods.components.TabScreen
 import com.strangerweather.rootlessuimods.ui.theme.RootlessUIModsTheme
 import com.strangerweather.rootlessuimods.utils.ColorCircle
 import com.strangerweather.rootlessuimods.utils.ColorPicker
@@ -29,6 +31,7 @@ import tk.zwander.fabricateoverlay.ShizukuUtils
 
 @ExperimentalGraphicsApi
 class MainActivity : ComponentActivity() {
+    @ExperimentalPagerApi
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         HiddenApiBypass.setHiddenApiExemptions("L")
@@ -71,6 +74,7 @@ class MainActivity : ComponentActivity() {
     }
 
 
+    @ExperimentalPagerApi
     @ExperimentalGraphicsApi
     private fun setAppContent() {
         setContent {
@@ -84,21 +88,24 @@ class MainActivity : ComponentActivity() {
                             )
                         },
                         content = {
-                            LazyColumn(
-                                modifier = Modifier.fillMaxHeight(),
-                                horizontalAlignment = Alignment.CenterHorizontally
-                            ) {
-                                item {
-                                    HomePageButtons(
-                                        context = context,
-                                        info = applicationInfo,
-                                        name = "accent1100_6",
-                                        target = "android"
-                                    )
-                                }
-                            }
-                        }
-                    )
+                            TabScreen()
+//                            LazyColumn(
+//                                modifier = Modifier.fillMaxHeight(),
+//                                horizontalAlignment = Alignment.CenterHorizontally
+//                            ) {
+//                                item {
+//                                    HomePageButtons(
+//                                        context = context,
+//                                        info = applicationInfo,
+//                                        name = "accent1100_6",
+//                                        target = "android"
+//                                    )
+//                                }
+//                            }
+//                        }
+//                    )
+//                }
+                        })
                 }
             }
         }

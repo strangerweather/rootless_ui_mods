@@ -1,4 +1,4 @@
-package com.strangerweather.rootlessuimods.components
+package com.strangerweather.rootlessuimods.components.dialogs
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.*

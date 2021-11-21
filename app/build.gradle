@@ -57,6 +57,7 @@ dependencies {
     implementation "androidx.compose.ui:ui-tooling-preview:$compose_version"
     implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.4.0'
     implementation 'androidx.activity:activity-compose:1.4.0'
+    implementation "androidx.paging:paging-runtime-ktx:3.1.0"
 
     def shizuku_version = '12.1.0'
     implementation "dev.rikka.shizuku:api:$shizuku_version"
@@ -67,6 +68,8 @@ dependencies {
     implementation 'com.github.zacharee:FabricateOverlay:master'
 
     implementation 'com.godaddy.android.colorpicker:compose-color-picker-android:0.2.1'
+
+    implementation "com.google.accompanist:accompanist-pager:0.21.3-beta"
 
     testImplementation 'junit:junit:4.+'
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'
