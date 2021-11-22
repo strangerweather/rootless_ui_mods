@@ -1,4 +1,4 @@
-package com.strangerweather.rootlessuimods.components
+package com.strangerweather.rootlessuimods.components.tabs
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.height
@@ -17,14 +17,13 @@ import com.google.accompanist.pager.HorizontalPager
 import com.google.accompanist.pager.PagerState
 import com.google.accompanist.pager.rememberPagerState
 import com.strangerweather.rootlessuimods.R
-import com.strangerweather.rootlessuimods.components.tabs.Tabs
 import kotlinx.coroutines.launch
 
 @ExperimentalPagerApi
 @Composable
 fun TabScreen() {
     val pagerState = rememberPagerState(initialPage = 0)
-    Column(Modifier.height(200.dp)) {
+       Column(Modifier.height(200.dp)) {
         Tabs(pagerState)
         TabsContent(pagerState)
     }

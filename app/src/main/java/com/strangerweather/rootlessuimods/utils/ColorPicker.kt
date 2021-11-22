@@ -50,10 +50,10 @@ fun ColorCircle() {
     )
 }
 
-fun registerLayer(context: Context, name: String, target: String) {
+fun registerLayer(context: Context, name: String, target: String, overlay:String) {
     val overlayEntries = listOf(
         FabricatedOverlayEntry(
-            resourceName = "$target:color/system_accent1_100",
+            resourceName = "$target:$overlay",
             resourceType = 28,
             resourceValue = resourceValue.value
         )

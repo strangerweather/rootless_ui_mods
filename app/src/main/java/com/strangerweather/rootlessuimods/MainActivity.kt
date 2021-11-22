@@ -9,14 +9,18 @@ import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.*
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.snapshotFlow
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.ExperimentalGraphicsApi
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import com.google.accompanist.pager.ExperimentalPagerApi
+import com.google.accompanist.pager.PagerState
+import com.google.accompanist.pager.rememberPagerState
 import com.strangerweather.rootlessuimods.components.BasicContent
-import com.strangerweather.rootlessuimods.components.TabScreen
+import com.strangerweather.rootlessuimods.components.tabs.TabScreen
 import com.strangerweather.rootlessuimods.ui.theme.RootlessUIModsTheme
+import kotlinx.coroutines.InternalCoroutinesApi
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
@@ -68,7 +72,6 @@ class MainActivity : ComponentActivity() {
             .show()
     }
 
-
     @ExperimentalPagerApi
     @ExperimentalGraphicsApi
     private fun setAppContent() {
@@ -82,9 +85,31 @@ class MainActivity : ComponentActivity() {
                             )
                         },
                         content = {
+//                            val overlay = when (pagerState.currentPage) {
+//                                0 -> "color/system_accent1_100"
+//                                1 -> "color/system_neutral1_50"
+//                                2 -> ""
+//                                else -> ""
+//                            }
+//
+//                            val target = "android"
+//
+//                            val name = when (pagerState.currentPage) {
+//                                0 -> "accent1_100"
+//                                1 -> "neutral1_50"
+//                                2 -> ""
+//                                else -> ""
+//                            }
+
                             Column(Modifier.fillMaxSize()) {
                                 TabScreen()
-                                BasicContent()
+                                BasicContent(
+                                    context = applicationContext,
+                                    info = applicationInfo,
+//                                    name = name,
+//                                    target = target,
+//                                    overlay = overlay
+                                )
                             }
                         }
                     )

@@ -20,7 +20,8 @@ fun ColorPickerDialog(
     state: MutableState<Boolean>,
     context: Context,
     name: String,
-    target: String
+    target: String,
+    overlay: String,
 ) {
     AlertDialog(
         onDismissRequest = { state.value = false },
@@ -34,7 +35,7 @@ fun ColorPickerDialog(
             Button(
                 onClick = {
                     state.value = false
-                    registerLayer(context, name, target)
+                    registerLayer(context, name, target, overlay)
                 }) {
                 Text("Confirm")
             }

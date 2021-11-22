@@ -17,6 +17,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.google.accompanist.pager.ExperimentalPagerApi
 import com.strangerweather.rootlessuimods.R
 import com.strangerweather.rootlessuimods.components.dialogs.ColorPickerDialog
 import com.strangerweather.rootlessuimods.functions.disableLayer
@@ -25,9 +26,10 @@ import com.strangerweather.rootlessuimods.ui.theme.LightGreen200
 import com.strangerweather.rootlessuimods.ui.theme.Purple200
 import com.strangerweather.rootlessuimods.ui.theme.Purple500
 
+@ExperimentalPagerApi
 @ExperimentalGraphicsApi
 @Composable
-fun BasicContent(context: Context, info: ApplicationInfo, name: String, target: String) {
+fun BasicContent(context: Context, info: ApplicationInfo, name: String, target: String, overlay: String) {
     val showAlertDialog = remember { mutableStateOf(false) }
     var progress by remember { mutableStateOf(0.1f) }
     val animatedProgress by animateFloatAsState(
@@ -36,7 +38,7 @@ fun BasicContent(context: Context, info: ApplicationInfo, name: String, target: 
     )
 
     if (showAlertDialog.value) {
-        AlertDialogView(state = showAlertDialog, context = context, name = name, target = target)
+        AlertDialogView(state = showAlertDialog, context = context, name = name, target = target, overlay = overlay)
     }
 
 
@@ -142,6 +144,6 @@ fun BasicContent(context: Context, info: ApplicationInfo, name: String, target: 
 
 @ExperimentalGraphicsApi
 @Composable
-fun AlertDialogView(state: MutableState<Boolean>, context: Context, name: String, target: String) {
-    ColorPickerDialog(state, context, name, target)
+fun AlertDialogView(state: MutableState<Boolean>, context: Context, name: String, target: String, overlay:String) {
+    ColorPickerDialog(state, context, name, target, overlay)
 }
