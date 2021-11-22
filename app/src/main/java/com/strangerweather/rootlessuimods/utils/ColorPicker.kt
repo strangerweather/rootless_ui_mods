@@ -36,7 +36,7 @@ fun ColorPicker() {
         onColorChanged = { color: HsvColor ->
             resourceValue.value = color.toColorInt()
         },
-        color = Purple500
+        color = Color(resourceValue.value)
     )
 }
 
