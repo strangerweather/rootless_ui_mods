@@ -12,28 +12,31 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.ExperimentalGraphicsApi
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.strangerweather.rootlessuimods.R
 import com.strangerweather.rootlessuimods.components.dialogs.ColorPickerDialog
+import com.strangerweather.rootlessuimods.functions.disableLayer
 import com.strangerweather.rootlessuimods.functions.enableLayer
 import com.strangerweather.rootlessuimods.ui.theme.LightGreen200
 import com.strangerweather.rootlessuimods.ui.theme.Purple200
 import com.strangerweather.rootlessuimods.ui.theme.Purple500
 
+@ExperimentalGraphicsApi
 @Composable
-fun BasicContent() {
-    val showAlertDialog = remember{ mutableStateOf(false)}
+fun BasicContent(context: Context, info: ApplicationInfo, name: String, target: String) {
+    val showAlertDialog = remember { mutableStateOf(false) }
     var progress by remember { mutableStateOf(0.1f) }
     val animatedProgress by animateFloatAsState(
         targetValue = progress,
         animationSpec = ProgressIndicatorDefaults.ProgressAnimationSpec
     )
 
-    if (showAlertDialog.value){
-        AlertDialogView(state = showAlertDialog)
+    if (showAlertDialog.value) {
+        AlertDialogView(state = showAlertDialog, context = context, name = name, target = target)
     }
 
 
@@ -58,7 +61,7 @@ fun BasicContent() {
                 ) {
                     Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween) {
                         OutlinedButton(
-                            onClick = {  showAlertDialog.value = true },
+                            onClick = { showAlertDialog.value = true },
                             Modifier
                                 .height(50.dp)
                                 .width(135.dp),
@@ -97,7 +100,7 @@ fun BasicContent() {
                             OutlinedButton(
                                 onClick = {
                                     if (progress < 1f) progress += 0.1f
-//                                enableLayer(context, info, name, target)
+                                    enableLayer(context, info, name, target)
                                 },
                                 Modifier
                                     .height(50.dp)
@@ -124,7 +127,7 @@ fun BasicContent() {
                     verticalArrangement = Arrangement.Center
                 ) {
                     OutlinedButton(
-                        onClick = {},
+                        onClick = { disableLayer(context, info, name, target) },
                         Modifier
                             .height(50.dp)
                             .width(135.dp)
@@ -137,7 +140,8 @@ fun BasicContent() {
     }
 }
 
+@ExperimentalGraphicsApi
 @Composable
-fun AlertDialogView(state: MutableState<Boolean>) {
-    ColorPickerDialog(state = state)
+fun AlertDialogView(state: MutableState<Boolean>, context: Context, name: String, target: String) {
+    ColorPickerDialog(state, context, name, target)
 }
