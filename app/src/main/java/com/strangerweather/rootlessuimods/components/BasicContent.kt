@@ -17,6 +17,7 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.strangerweather.rootlessuimods.R
+import com.strangerweather.rootlessuimods.components.dialogs.ColorPickerDialog
 import com.strangerweather.rootlessuimods.functions.enableLayer
 import com.strangerweather.rootlessuimods.ui.theme.LightGreen200
 import com.strangerweather.rootlessuimods.ui.theme.Purple200
@@ -24,11 +25,18 @@ import com.strangerweather.rootlessuimods.ui.theme.Purple500
 
 @Composable
 fun BasicContent() {
+    val showAlertDialog = remember{ mutableStateOf(false)}
     var progress by remember { mutableStateOf(0.1f) }
     val animatedProgress by animateFloatAsState(
         targetValue = progress,
         animationSpec = ProgressIndicatorDefaults.ProgressAnimationSpec
     )
+
+    if (showAlertDialog.value){
+        AlertDialogView(state = showAlertDialog)
+    }
+
+
     LazyColumn(
         Modifier
             .fillMaxSize()
@@ -50,7 +58,7 @@ fun BasicContent() {
                 ) {
                     Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween) {
                         OutlinedButton(
-                            onClick = { },
+                            onClick = {  showAlertDialog.value = true },
                             Modifier
                                 .height(50.dp)
                                 .width(135.dp),
@@ -129,3 +137,7 @@ fun BasicContent() {
     }
 }
 
+@Composable
+fun AlertDialogView(state: MutableState<Boolean>) {
+    ColorPickerDialog(state = state)
+}

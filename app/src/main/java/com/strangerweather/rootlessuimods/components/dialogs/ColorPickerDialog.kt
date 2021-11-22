@@ -1,47 +1,44 @@
 package com.strangerweather.rootlessuimods.components.dialogs
 
-import androidx.compose.foundation.layout.*
-import androidx.compose.material.*
-import androidx.compose.runtime.*
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.unit.dp
+import androidx.compose.foundation.layout.Column
+import androidx.compose.material.AlertDialog
+import androidx.compose.material.Button
+import androidx.compose.material.Text
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.MutableState
+import androidx.compose.ui.graphics.ExperimentalGraphicsApi
+import com.strangerweather.rootlessuimods.utils.ColorPicker
 
+@ExperimentalGraphicsApi
 @Composable
-fun ColorPickerDialog(){
-    val openDialog = remember { mutableStateOf(true) }
-    var text by remember { mutableStateOf("") }
-
-    if (openDialog.value) {
-        AlertDialog(
-            onDismissRequest = {
-                openDialog.value = false
-            },
-            title = {
-                Text(text = "Title")
-            },
-            text = {
-                Column() {
-                    TextField(
-                        value = text,
-                        onValueChange = { text = it }
-                    )
-                    Text("Custom Text")
-                    Checkbox(checked = false, onCheckedChange = {})
-                }
-            },
-            buttons = {
-                Row(
-                    modifier = Modifier.padding(all = 8.dp),
-                    horizontalArrangement = Arrangement.Center
-                ) {
-                    Button(
-                        modifier = Modifier.fillMaxWidth(),
-                        onClick = { openDialog.value = false }
-                    ) {
-                        Text("Dismiss")
-                    }
-                }
+fun ColorPickerDialog(state: MutableState<Boolean>) {
+    AlertDialog(
+        onDismissRequest = { state.value = false },
+        title = {
+            Text(text = "Dialog Title")
+        },
+        text = {
+            Column {
+                Text("Here is text ")
+                ColorPicker()
             }
-        )
-    }
+
+        },
+        confirmButton = {
+            Button(
+                onClick = {
+                    state.value = false
+                }) {
+                Text("This is the Confirm Button")
+            }
+        },
+        dismissButton = {
+            Button(
+                onClick = {
+                    state.value = false
+                }) {
+                Text("This is the dismiss Button")
+            }
+        }
+    )
 }
