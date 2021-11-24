@@ -102,7 +102,7 @@ class MainActivity : ComponentActivity() {
                                 val overlay = when (currentPage.value) {
                                     0 -> "color/system_accent1_100"
                                     1 -> "color/system_neutral1_50"
-                                    2 -> ""
+                                    2 -> "color/system_neutral1_0"
                                     else -> ""
                                 }
 
@@ -111,7 +111,7 @@ class MainActivity : ComponentActivity() {
                                 val name = when (currentPage.value) {
                                     0 -> "accent1_100"
                                     1 -> "neutral1_50"
-                                    2 -> ""
+                                    2 -> "neutral1_0"
                                     else -> ""
                                 }
 
