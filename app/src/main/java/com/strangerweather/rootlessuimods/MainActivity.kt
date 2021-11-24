@@ -10,18 +10,23 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.*
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.runtime.snapshotFlow
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.ExperimentalGraphicsApi
 import androidx.compose.ui.res.stringResource
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.google.accompanist.pager.ExperimentalPagerApi
 import com.google.accompanist.pager.PagerState
 import com.google.accompanist.pager.rememberPagerState
 import com.strangerweather.rootlessuimods.components.BasicContent
 import com.strangerweather.rootlessuimods.components.tabs.TabScreen
 import com.strangerweather.rootlessuimods.ui.theme.RootlessUIModsTheme
+import com.strangerweather.rootlessuimods.utils.MainViewModel
 import kotlinx.coroutines.InternalCoroutinesApi
 import kotlinx.coroutines.delay
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 import org.lsposed.hiddenapibypass.HiddenApiBypass
@@ -78,6 +83,7 @@ class MainActivity : ComponentActivity() {
         setContent {
             RootlessUIModsTheme {
                 Surface(color = MaterialTheme.colors.background) {
+                    val viewModel: MainViewModel = viewModel()
                     Scaffold(
                         topBar = {
                             TopAppBar(
@@ -85,30 +91,38 @@ class MainActivity : ComponentActivity() {
                             )
                         },
                         content = {
-//                            val overlay = when (pagerState.currentPage) {
-//                                0 -> "color/system_accent1_100"
-//                                1 -> "color/system_neutral1_50"
-//                                2 -> ""
-//                                else -> ""
-//                            }
-//
-//                            val target = "android"
-//
-//                            val name = when (pagerState.currentPage) {
-//                                0 -> "accent1_100"
-//                                1 -> "neutral1_50"
-//                                2 -> ""
-//                                else -> ""
-//                            }
+
+
+
 
                             Column(Modifier.fillMaxSize()) {
+
+                                val currentPage = viewModel.page.observeAsState()
+
+                                val overlay = when (currentPage.value) {
+                                    0 -> "color/system_accent1_100"
+                                    1 -> "color/system_neutral1_50"
+                                    2 -> ""
+                                    else -> ""
+                                }
+
+                                val target = "android"
+
+                                val name = when (currentPage.value) {
+                                    0 -> "accent1_100"
+                                    1 -> "neutral1_50"
+                                    2 -> ""
+                                    else -> ""
+                                }
+
+
                                 TabScreen()
                                 BasicContent(
                                     context = applicationContext,
                                     info = applicationInfo,
-//                                    name = name,
-//                                    target = target,
-//                                    overlay = overlay
+                                    name = name,
+                                    target = target,
+                                    overlay = overlay
                                 )
                             }
                         }

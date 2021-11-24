@@ -12,18 +12,20 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.google.accompanist.pager.ExperimentalPagerApi
 import com.google.accompanist.pager.HorizontalPager
 import com.google.accompanist.pager.PagerState
 import com.google.accompanist.pager.rememberPagerState
 import com.strangerweather.rootlessuimods.R
+import com.strangerweather.rootlessuimods.utils.MainViewModel
 import kotlinx.coroutines.launch
 
 @ExperimentalPagerApi
 @Composable
 fun TabScreen() {
     val pagerState = rememberPagerState(initialPage = 0)
-       Column(Modifier.height(200.dp)) {
+    Column(Modifier.height(200.dp)) {
         Tabs(pagerState)
         TabsContent(pagerState)
     }
@@ -33,6 +35,9 @@ fun TabScreen() {
 @ExperimentalPagerApi
 @Composable
 fun TabsContent(pagerState: PagerState) {
+
+    val viewModel: MainViewModel = viewModel()
+
     HorizontalPager(state = pagerState, count = 3) { page ->
         when (page) {
             0 -> Tabs(
@@ -51,6 +56,7 @@ fun TabsContent(pagerState: PagerState) {
                 )
             )
         }
+        viewModel.onPageChanged(currentPage)
     }
 }
 
