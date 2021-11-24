@@ -92,9 +92,6 @@ class MainActivity : ComponentActivity() {
                         },
                         content = {
 
-
-
-
                             Column(Modifier.fillMaxSize()) {
 
                                 val currentPage = viewModel.page.observeAsState()

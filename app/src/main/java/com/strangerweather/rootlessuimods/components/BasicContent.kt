@@ -2,43 +2,49 @@ package com.strangerweather.rootlessuimods.components
 
 import android.content.Context
 import android.content.pm.ApplicationInfo
-import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.foundation.background
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.material.*
-import androidx.compose.runtime.*
+import androidx.compose.material.Card
+import androidx.compose.material.OutlinedButton
+import androidx.compose.material.Text
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.MutableState
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ExperimentalGraphicsApi
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import com.google.accompanist.pager.ExperimentalPagerApi
 import com.strangerweather.rootlessuimods.R
 import com.strangerweather.rootlessuimods.components.dialogs.ColorPickerDialog
 import com.strangerweather.rootlessuimods.functions.disableLayer
 import com.strangerweather.rootlessuimods.functions.enableLayer
-import com.strangerweather.rootlessuimods.ui.theme.LightGreen200
-import com.strangerweather.rootlessuimods.ui.theme.Purple200
-import com.strangerweather.rootlessuimods.ui.theme.Purple500
 
 @ExperimentalPagerApi
 @ExperimentalGraphicsApi
 @Composable
-fun BasicContent(context: Context, info: ApplicationInfo, name: String, target: String, overlay: String) {
+fun BasicContent(
+    context: Context,
+    info: ApplicationInfo,
+    name: String,
+    target: String,
+    overlay: String
+) {
     val showAlertDialog = remember { mutableStateOf(false) }
-    var progress by remember { mutableStateOf(0.1f) }
-    val animatedProgress by animateFloatAsState(
-        targetValue = progress,
-        animationSpec = ProgressIndicatorDefaults.ProgressAnimationSpec
-    )
 
     if (showAlertDialog.value) {
-        AlertDialogView(state = showAlertDialog, context = context, name = name, target = target, overlay = overlay)
+        AlertDialogView(
+            state = showAlertDialog,
+            context = context,
+            name = name,
+            target = target,
+            overlay = overlay
+        )
     }
 
 
@@ -61,7 +67,10 @@ fun BasicContent(context: Context, info: ApplicationInfo, name: String, target: 
                     horizontalAlignment = Alignment.CenterHorizontally,
                     verticalArrangement = Arrangement.Center
                 ) {
-                    Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween) {
+                    Column(
+                        Modifier.fillMaxWidth(),
+                        horizontalAlignment = Alignment.CenterHorizontally
+                    ) {
                         OutlinedButton(
                             onClick = { showAlertDialog.value = true },
                             Modifier
@@ -70,21 +79,13 @@ fun BasicContent(context: Context, info: ApplicationInfo, name: String, target: 
                         ) {
                             Text(text = stringResource(id = R.string.color_picker))
                         }
-                        OutlinedButton(
-                            onClick = { /*TODO*/ },
-                            Modifier
-                                .height(50.dp)
-                                .width(135.dp)
-                        ) {
-                            Text(text = stringResource(id = R.string.color_presets))
-                        }
                     }
                 }
             }
             Card(
                 Modifier
                     .fillMaxWidth()
-                    .height(200.dp)
+                    .height(150.dp)
                     .padding(10.dp), elevation = 7.dp
             ) {
                 Column(
@@ -101,7 +102,6 @@ fun BasicContent(context: Context, info: ApplicationInfo, name: String, target: 
                         ) {
                             OutlinedButton(
                                 onClick = {
-                                    if (progress < 1f) progress += 0.1f
                                     enableLayer(context, info, name, target)
                                 },
                                 Modifier
@@ -110,9 +110,6 @@ fun BasicContent(context: Context, info: ApplicationInfo, name: String, target: 
                             ) {
                                 Text(text = stringResource(id = R.string.activate))
                             }
-
-                            Spacer(modifier = Modifier.height(40.dp))
-                            LinearProgressIndicator(progress = animatedProgress)
                         }
                     }
                 }
@@ -144,6 +141,12 @@ fun BasicContent(context: Context, info: ApplicationInfo, name: String, target: 
 
 @ExperimentalGraphicsApi
 @Composable
-fun AlertDialogView(state: MutableState<Boolean>, context: Context, name: String, target: String, overlay:String) {
+fun AlertDialogView(
+    state: MutableState<Boolean>,
+    context: Context,
+    name: String,
+    target: String,
+    overlay: String
+) {
     ColorPickerDialog(state, context, name, target, overlay)
 }
