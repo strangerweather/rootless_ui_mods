@@ -22,8 +22,13 @@ import androidx.compose.ui.unit.dp
 import com.google.accompanist.pager.ExperimentalPagerApi
 import com.strangerweather.rootlessuimods.R
 import com.strangerweather.rootlessuimods.components.dialogs.ColorPickerDialog
+import com.strangerweather.rootlessuimods.functions.deleteLayer
 import com.strangerweather.rootlessuimods.functions.disableLayer
 import com.strangerweather.rootlessuimods.functions.enableLayer
+import kotlinx.coroutines.coroutineScope
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
 
 @ExperimentalPagerApi
 @ExperimentalGraphicsApi
@@ -126,7 +131,11 @@ fun BasicContent(
                     verticalArrangement = Arrangement.Center
                 ) {
                     OutlinedButton(
-                        onClick = { disableLayer(context, info, name, target) },
+                        onClick = {
+                            runBlocking {
+                                removeAndDelete(context, info, name, target)
+                            }
+                        },
                         Modifier
                             .height(50.dp)
                             .width(135.dp)
@@ -137,6 +146,16 @@ fun BasicContent(
             }
         }
     }
+}
+
+suspend fun removeAndDelete(
+    context: Context,
+    info: ApplicationInfo,
+    name: String,
+    target: String
+) = coroutineScope { // this: CoroutineScope
+    disableLayer(context, info, name, target)
+    deleteLayer(context, name, target)
 }
 
 @ExperimentalGraphicsApi

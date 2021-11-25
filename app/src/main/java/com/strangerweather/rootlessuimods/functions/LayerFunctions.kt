@@ -30,4 +30,19 @@ fun disableLayer(
             ), !info.enabled, 0
         )
     }
+
+}
+
+fun deleteLayer(
+    context: Context,
+    name: String,
+    target: String
+) {
+    OverlayAPI.getInstance(context) { api ->
+        api.unregisterFabricatedOverlay(
+            FabricatedOverlay.generateOverlayIdentifier(
+                "com.strangerweather.rootlessuimods.$target.$name"
+            )
+        )
+    }
 }
