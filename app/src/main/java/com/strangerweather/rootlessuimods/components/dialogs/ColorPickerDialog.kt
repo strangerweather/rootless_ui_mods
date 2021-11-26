@@ -7,15 +7,18 @@ import androidx.compose.material.Button
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
+import androidx.compose.runtime.livedata.observeAsState
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.ExperimentalGraphicsApi
-import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.unit.dp
-import com.strangerweather.rootlessuimods.components.ColorTextField
-import com.strangerweather.rootlessuimods.utils.ColorCircle
-import com.strangerweather.rootlessuimods.utils.ColorPicker
-import com.strangerweather.rootlessuimods.utils.registerLayer
+import androidx.lifecycle.viewmodel.compose.viewModel
+import com.strangerweather.rootlessuimods.components.*
+import com.strangerweather.rootlessuimods.ui.theme.Purple500
+import com.strangerweather.rootlessuimods.utils.MainViewModel
 
 @ExperimentalGraphicsApi
 @Composable
@@ -26,6 +29,12 @@ fun ColorPickerDialog(
     target: String,
     overlay: String,
 ) {
+
+    val resourceValue = remember{ mutableStateOf(Purple500.toArgb())}
+    val viewModel: MainViewModel = viewModel()
+    val hexValue = viewModel.convertedHex.observeAsState()
+    val colorResource = if (hexValue.value!= null) hexValue.value else resourceValue.value
+
     AlertDialog(modifier = Modifier.height(600.dp),
         onDismissRequest = { state.value = false },
         text = {

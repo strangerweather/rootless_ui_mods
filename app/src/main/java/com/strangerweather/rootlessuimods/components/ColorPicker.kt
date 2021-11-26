@@ -1,21 +1,20 @@
-package com.strangerweather.rootlessuimods.utils
+package com.strangerweather.rootlessuimods.components
 
 import android.content.Context
 import androidx.compose.foundation.background
-import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ExperimentalGraphicsApi
 import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.unit.dp
-import androidx.core.graphics.toColor
 import com.godaddy.android.colorpicker.ClassicColorPicker
 import com.godaddy.android.colorpicker.HsvColor
 import com.godaddy.android.colorpicker.toColorInt
@@ -26,6 +25,7 @@ import tk.zwander.fabricateoverlay.OverlayAPI
 
 
 var resourceValue = mutableStateOf(Purple500.toArgb())
+
 
 @ExperimentalGraphicsApi
 @Composable
@@ -50,7 +50,7 @@ fun ColorCircle() {
     )
 }
 
-fun registerLayer(context: Context, name: String, target: String, overlay:String) {
+fun registerLayer(context: Context, name: String, target: String, overlay: String) {
     val overlayEntries = listOf(
         FabricatedOverlayEntry(
             resourceName = "$target:$overlay",
