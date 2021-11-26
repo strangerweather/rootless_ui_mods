@@ -26,14 +26,14 @@ fun ColorPickerDialog(
     target: String,
     overlay: String,
 ) {
-    AlertDialog(
+    AlertDialog(modifier = Modifier.height(600.dp),
         onDismissRequest = { state.value = false },
         text = {
             Column(horizontalAlignment = Alignment.CenterHorizontally) {
                 ColorTextField()
                 ColorPicker()
+                Spacer(modifier = Modifier.height(20.dp))
                 ColorCircle()
-
             }
         },
         buttons = {
