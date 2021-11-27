@@ -13,6 +13,7 @@ import androidx.compose.material.OutlinedTextField
 import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Check
+import androidx.compose.material.icons.filled.Palette
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -63,7 +64,7 @@ fun ColorTextField(context: Context, name: String, target: String, overlay: Stri
             label = { Text(text = "Enter Hex Value") }, singleLine = true,
             leadingIcon = {
                 Icon(
-                    painter = painterResource(id = R.drawable.ic_baseline_palette_24),
+                    imageVector = Icons.Filled.Palette,
                     contentDescription = "palette icon"
                 )
             },
