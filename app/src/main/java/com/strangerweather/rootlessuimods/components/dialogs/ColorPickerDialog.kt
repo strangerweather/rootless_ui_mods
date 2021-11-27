@@ -18,6 +18,7 @@ import androidx.compose.ui.text.android.style.LetterSpacingSpanEm
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.strangerweather.rootlessuimods.components.*
+import com.strangerweather.rootlessuimods.functions.registerLayer
 import com.strangerweather.rootlessuimods.ui.theme.Purple500
 import com.strangerweather.rootlessuimods.utils.MainViewModel
 
