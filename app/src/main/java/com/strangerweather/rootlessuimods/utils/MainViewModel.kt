@@ -12,10 +12,4 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     fun onPageChanged(newValue: Int) {
         page.value = newValue
     }
-
-    val convertedHex = MutableLiveData( resourceValue.value)
-
-    fun onConvertedHexChanged(newValue: Int){
-        convertedHex.value = newValue
-    }
 }

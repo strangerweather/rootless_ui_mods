@@ -1,5 +1,7 @@
 package com.strangerweather.rootlessuimods.components
 
+import android.content.Context
+import android.widget.Toast
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -30,11 +32,23 @@ object HexToJetpackColor {
 }
 
 @Composable
-fun ColorTextField() {
-
-    val viewModel: MainViewModel = viewModel()
+fun ColorTextField(context: Context, name: String, target: String, overlay: String) {
     var hex by remember { mutableStateOf("") }
     val maxChar = 6
+
+    fun action() {
+        if (hex.isNotEmpty()) {
+            registerLayer(
+                context,
+                name,
+                target,
+                overlay,
+                HexToJetpackColor.getColor(hex).toArgb()
+            )
+        } else {
+            Toast.makeText(context, "Value Needed", Toast.LENGTH_SHORT).show()
+        }
+    }
 
     Column(
         Modifier
@@ -55,7 +69,7 @@ fun ColorTextField() {
             },
             trailingIcon = {
                 IconButton(onClick = {
-                    viewModel.onConvertedHexChanged(HexToJetpackColor.getColor(hex).toArgb())
+                    action()
                 }) {
                     Icon(
                         imageVector = Icons.Filled.Check,
@@ -69,12 +83,11 @@ fun ColorTextField() {
             ),
             keyboardActions = KeyboardActions(
                 onDone = {
-                    viewModel.onConvertedHexChanged(
-                        HexToJetpackColor.getColor(hex).toArgb()
-                    )
+                    action()
                 }
-
             )
         )
     }
 }
+
+

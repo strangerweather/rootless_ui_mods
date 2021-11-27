@@ -33,7 +33,7 @@ fun ColorPickerDialog(
         onDismissRequest = { state.value = false },
         text = {
             Column(horizontalAlignment = Alignment.CenterHorizontally) {
-                ColorTextField()
+                ColorTextField(context, name, target, overlay)
                 ColorPicker()
                 Spacer(modifier = Modifier.height(20.dp))
                 ColorCircle()
@@ -56,7 +56,7 @@ fun ColorPickerDialog(
                 Button(
                     onClick = {
                         state.value = false
-                        registerLayer(context, name, target, overlay)
+                        registerLayer(context, name, target, overlay,  resourceValue.value)
                     }, Modifier.width(100.dp)
                 ) {
                     Text("Confirm")

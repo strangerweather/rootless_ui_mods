@@ -50,26 +50,23 @@ fun ColorPicker() {
 
 @Composable
 fun ColorCircle() {
-    val viewModel: MainViewModel = viewModel()
-    val hexValue = viewModel.convertedHex.observeAsState()
     Box(
         modifier = Modifier
             .padding(10.dp)
             .size(60.dp)
             .background(
-                color = if (hexValue.value == null) Color(resourceValue.value) else Color(
-                    hexValue.value!!
-                ), shape = CircleShape
+                color = Color(resourceValue.value),
+                shape = CircleShape
             )
     )
 }
 
-fun registerLayer(context: Context, name: String, target: String, overlay: String) {
+fun registerLayer(context: Context, name: String, target: String, overlay: String, value: Int) {
     val overlayEntries = listOf(
         FabricatedOverlayEntry(
             resourceName = "$target:$overlay",
             resourceType = 28,
-            resourceValue = resourceValue.value
+            resourceValue = value
         )
     )
     OverlayAPI.getInstance(context) { api ->
