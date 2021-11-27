@@ -29,12 +29,6 @@ fun ColorPickerDialog(
     target: String,
     overlay: String,
 ) {
-
-    val resourceValue = remember{ mutableStateOf(Purple500.toArgb())}
-    val viewModel: MainViewModel = viewModel()
-    val hexValue = viewModel.convertedHex.observeAsState()
-    val colorResource = if (hexValue.value!= null) hexValue.value else resourceValue.value
-
     AlertDialog(modifier = Modifier.height(600.dp),
         onDismissRequest = { state.value = false },
         text = {
