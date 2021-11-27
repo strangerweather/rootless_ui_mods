@@ -1,6 +1,5 @@
 <resources>
     <string name="app_name">Rootless UI Mods</string>
-    <string name="title">"Rootless UI Color Mods"</string>
     <string name="remove">Remove</string>
     <string name="to_remove">To Remove</string>
     <string name="apply">Apply</string>

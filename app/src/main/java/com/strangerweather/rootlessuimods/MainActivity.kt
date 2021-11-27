@@ -7,22 +7,30 @@ import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.*
-import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.*
 import androidx.compose.runtime.livedata.observeAsState
-import androidx.compose.runtime.snapshotFlow
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.ExperimentalGraphicsApi
 import androidx.compose.ui.res.stringResource
 import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.navigation.NavController
+import androidx.navigation.NavDestination
+import androidx.navigation.NavDestination.Companion.hierarchy
+import androidx.navigation.NavGraph.Companion.findStartDestination
+import androidx.navigation.NavHostController
+import androidx.navigation.compose.currentBackStackEntryAsState
+import androidx.navigation.compose.rememberNavController
 import com.google.accompanist.pager.ExperimentalPagerApi
 import com.google.accompanist.pager.PagerState
 import com.google.accompanist.pager.rememberPagerState
 import com.strangerweather.rootlessuimods.components.BasicContent
 import com.strangerweather.rootlessuimods.components.tabs.TabScreen
 import com.strangerweather.rootlessuimods.content.ColorModsContent
+import com.strangerweather.rootlessuimods.navigation.BottomBarScreen
+import com.strangerweather.rootlessuimods.navigation.BottomNavGraph
 import com.strangerweather.rootlessuimods.ui.theme.RootlessUIModsTheme
 import com.strangerweather.rootlessuimods.utils.MainViewModel
 import kotlinx.coroutines.InternalCoroutinesApi
@@ -81,26 +89,80 @@ class MainActivity : ComponentActivity() {
     @ExperimentalPagerApi
     @ExperimentalGraphicsApi
     private fun setAppContent() {
+
         setContent {
             RootlessUIModsTheme {
                 Surface(color = MaterialTheme.colors.background) {
-                    Scaffold(
-                        topBar = {
-                            TopAppBar(
-                                title = { Text(stringResource(id = R.string.title)) },
-                            )
-                        },
-                        content = {
-                            ColorModsContent(
-                                applicationContext = applicationContext,
-                                applicationInfo = applicationInfo
-                            )
-                        }
-                    )
+
+                    val navController = rememberNavController()
+
+                    Scaffold(topBar = {
+                        TopAppBar(
+                            title = { Text(stringResource(id = R.string.app_name)) },
+                        )
+                    },
+                        bottomBar = { BottomBar(navController = navController) }
+                    ) {
+                        BottomNavGraph(
+                            navController = navController,
+                            context = applicationContext,
+                            info = applicationInfo
+                        )
+                    }
                 }
             }
         }
     }
+}
+
+@Composable
+fun BottomBar(navController: NavHostController) {
+    val screens = listOf(
+        BottomBarScreen.Home,
+        BottomBarScreen.ColorMods,
+        BottomBarScreen.ScreenMods,
+    )
+    val navBackStackEntry by navController.currentBackStackEntryAsState()
+    val currentDestination = navBackStackEntry?.destination
+
+    BottomNavigation() {
+        screens.forEach { screen ->
+            AddItem(
+                screen = screen,
+                currentDestination = currentDestination,
+                navController = navController
+            )
+        }
+    }
+}
+
+@Composable
+fun RowScope.AddItem(
+    screen: BottomBarScreen,
+    currentDestination: NavDestination?,
+    navController: NavHostController
+) {
+    BottomNavigationItem(
+        label = {
+            Text(text = screen.title)
+        },
+        icon = {
+            Icon(
+                imageVector = screen.icon,
+                contentDescription = "navigation icon"
+            )
+        },
+        selected = currentDestination?.hierarchy?.any {
+            it.route == screen.route
+        } == true,
+        unselectedContentColor = LocalContentColor.current.copy(alpha = ContentAlpha.disabled),
+        onClick = {
+            navController.navigate(screen.route) {
+                popUpTo(navController.graph.findStartDestination().id)
+                launchSingleTop = true
+            }
+        }
+    )
 }
 
 
