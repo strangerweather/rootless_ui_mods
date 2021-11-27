@@ -2,16 +2,24 @@ package com.strangerweather.rootlessuimods.functions
 
 import android.content.Context
 import android.content.pm.ApplicationInfo
+import kotlinx.coroutines.coroutineScope
 import tk.zwander.fabricateoverlay.FabricatedOverlay
 import tk.zwander.fabricateoverlay.FabricatedOverlayEntry
 import tk.zwander.fabricateoverlay.OverlayAPI
 
 
-fun registerLayer(context: Context, name: String, target: String, overlay: String, value: Int) {
+fun registerLayer(
+    context: Context,
+    name: String,
+    target: String,
+    overlay: String,
+    type: Int,
+    value: Int
+) {
     val overlayEntries = listOf(
         FabricatedOverlayEntry(
             resourceName = "$target:$overlay",
-            resourceType = 28,
+            resourceType = type,
             resourceValue = value
         )
     )
@@ -69,4 +77,14 @@ fun deleteLayer(
             )
         )
     }
+}
+
+suspend fun removeAndDelete(
+    context: Context,
+    info: ApplicationInfo,
+    name: String,
+    target: String
+) = coroutineScope { // this: CoroutineScope
+    disableLayer(context, info, name, target)
+    deleteLayer(context, name, target)
 }

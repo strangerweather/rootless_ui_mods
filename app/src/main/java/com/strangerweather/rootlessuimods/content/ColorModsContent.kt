@@ -11,13 +11,14 @@ import androidx.compose.ui.graphics.ExperimentalGraphicsApi
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.google.accompanist.pager.ExperimentalPagerApi
 import com.strangerweather.rootlessuimods.components.BasicContent
+import com.strangerweather.rootlessuimods.components.TopCardColorMods
 import com.strangerweather.rootlessuimods.components.tabs.TabScreen
 import com.strangerweather.rootlessuimods.utils.MainViewModel
 
 @ExperimentalGraphicsApi
 @ExperimentalPagerApi
 @Composable
-fun ColorModsContent(applicationContext: Context, applicationInfo: ApplicationInfo ){
+fun ColorModsContent(applicationContext: Context, applicationInfo: ApplicationInfo) {
     Column(Modifier.fillMaxSize()) {
         val viewModel: MainViewModel = viewModel()
         val currentPage = viewModel.page.observeAsState()
@@ -38,14 +39,18 @@ fun ColorModsContent(applicationContext: Context, applicationInfo: ApplicationIn
             else -> ""
         }
 
-
         TabScreen()
+        TopCardColorMods(
+            context = applicationContext,
+            name = name,
+            target = target,
+            overlay = overlay
+        )
         BasicContent(
             context = applicationContext,
             info = applicationInfo,
             name = name,
-            target = target,
-            overlay = overlay
+            target = target
         )
     }
 }

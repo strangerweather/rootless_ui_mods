@@ -27,7 +27,6 @@ fun Tabs(tabTitle: String, tabText: String) {
             .background(if (isSystemInDarkTheme()) Color.DarkGray else Color(0xFFF5F5F5))
     )
     {
-
         Card(
             Modifier
                 .fillMaxWidth()

@@ -62,7 +62,7 @@ fun ColorPickerDialog(
                 Button(
                     onClick = {
                         state.value = false
-                        registerLayer(context, name, target, overlay, resourceValue.value)
+                        registerLayer(context, name, target, overlay, 28, resourceValue.value)
                     }, Modifier.width(100.dp)
                 ) {
                     Text("Confirm")

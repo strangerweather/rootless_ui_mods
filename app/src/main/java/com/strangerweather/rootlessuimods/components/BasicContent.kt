@@ -25,9 +25,8 @@ import com.strangerweather.rootlessuimods.components.dialogs.ColorPickerDialog
 import com.strangerweather.rootlessuimods.functions.deleteLayer
 import com.strangerweather.rootlessuimods.functions.disableLayer
 import com.strangerweather.rootlessuimods.functions.enableLayer
+import com.strangerweather.rootlessuimods.functions.removeAndDelete
 import kotlinx.coroutines.coroutineScope
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 
 @ExperimentalPagerApi
@@ -38,55 +37,13 @@ fun BasicContent(
     info: ApplicationInfo,
     name: String,
     target: String,
-    overlay: String
 ) {
-    val showAlertDialog = remember { mutableStateOf(false) }
-
-    if (showAlertDialog.value) {
-        AlertDialogView(
-            state = showAlertDialog,
-            context = context,
-            name = name,
-            target = target,
-            overlay = overlay
-        )
-    }
-
-
     LazyColumn(
         Modifier
             .fillMaxSize()
             .background(if (isSystemInDarkTheme()) Color.DarkGray else Color(0xFFF5F5F5))
     ) {
         item {
-            Card(
-                Modifier
-                    .fillMaxWidth()
-                    .height(150.dp)
-                    .padding(10.dp), elevation = 7.dp
-            ) {
-                Column(
-                    Modifier
-                        .padding(15.dp)
-                        .fillMaxSize(),
-                    horizontalAlignment = Alignment.CenterHorizontally,
-                    verticalArrangement = Arrangement.Center
-                ) {
-                    Column(
-                        Modifier.fillMaxWidth(),
-                        horizontalAlignment = Alignment.CenterHorizontally
-                    ) {
-                        OutlinedButton(
-                            onClick = { showAlertDialog.value = true },
-                            Modifier
-                                .height(50.dp)
-                                .width(135.dp),
-                        ) {
-                            Text(text = stringResource(id = R.string.color_picker))
-                        }
-                    }
-                }
-            }
             Card(
                 Modifier
                     .fillMaxWidth()
@@ -148,15 +105,58 @@ fun BasicContent(
     }
 }
 
-suspend fun removeAndDelete(
+@ExperimentalGraphicsApi
+@Composable
+fun TopCardColorMods(
     context: Context,
-    info: ApplicationInfo,
     name: String,
-    target: String
-) = coroutineScope { // this: CoroutineScope
-    disableLayer(context, info, name, target)
-    deleteLayer(context, name, target)
+    target: String,
+    overlay: String
+) {
+    val showAlertDialog = remember { mutableStateOf(false) }
+
+    if (showAlertDialog.value) {
+        AlertDialogView(
+            state = showAlertDialog,
+            context = context,
+            name = name,
+            target = target,
+            overlay = overlay
+        )
+    }
+    Column(Modifier.
+    background(if (isSystemInDarkTheme()) Color.DarkGray else Color(0xFFF5F5F5))) {
+        Card(
+            Modifier
+                .fillMaxWidth()
+                .height(150.dp)
+                .padding(10.dp), elevation = 7.dp
+        ) {
+            Column(
+                Modifier
+                    .padding(15.dp)
+                    .fillMaxSize(),
+                horizontalAlignment = Alignment.CenterHorizontally,
+                verticalArrangement = Arrangement.Center
+            ) {
+                Column(
+                    Modifier.fillMaxWidth(),
+                    horizontalAlignment = Alignment.CenterHorizontally
+                ) {
+                    OutlinedButton(
+                        onClick = { showAlertDialog.value = true },
+                        Modifier
+                            .height(50.dp)
+                            .width(135.dp),
+                    ) {
+                        Text(text = stringResource(id = R.string.color_picker))
+                    }
+                }
+            }
+        }
+    }
 }
+
 
 @ExperimentalGraphicsApi
 @Composable

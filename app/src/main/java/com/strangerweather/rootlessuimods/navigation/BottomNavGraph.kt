@@ -28,7 +28,10 @@ fun BottomNavGraph(navController: NavHostController, context: Context, info: App
             )
         }
         composable(route = BottomBarScreen.ScreenMods.route) {
-            ScreenModsContent()
+            ScreenModsContent(
+                applicationContext = context,
+                applicationInfo = info
+            )
         }
     }
 }

@@ -39,6 +39,7 @@ fun ColorTextField(context: Context, name: String, target: String, overlay: Stri
                 name,
                 target,
                 overlay,
+                28,
                 HexToJetpackColor.getColor(hex).toArgb()
             )
         } else {
