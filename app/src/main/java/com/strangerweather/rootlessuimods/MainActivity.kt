@@ -22,6 +22,7 @@ import com.google.accompanist.pager.PagerState
 import com.google.accompanist.pager.rememberPagerState
 import com.strangerweather.rootlessuimods.components.BasicContent
 import com.strangerweather.rootlessuimods.components.tabs.TabScreen
+import com.strangerweather.rootlessuimods.content.ColorModsContent
 import com.strangerweather.rootlessuimods.ui.theme.RootlessUIModsTheme
 import com.strangerweather.rootlessuimods.utils.MainViewModel
 import kotlinx.coroutines.InternalCoroutinesApi
@@ -83,7 +84,6 @@ class MainActivity : ComponentActivity() {
         setContent {
             RootlessUIModsTheme {
                 Surface(color = MaterialTheme.colors.background) {
-                    val viewModel: MainViewModel = viewModel()
                     Scaffold(
                         topBar = {
                             TopAppBar(
@@ -91,37 +91,10 @@ class MainActivity : ComponentActivity() {
                             )
                         },
                         content = {
-
-                            Column(Modifier.fillMaxSize()) {
-
-                                val currentPage = viewModel.page.observeAsState()
-
-                                val overlay = when (currentPage.value) {
-                                    0 -> "color/system_accent1_100"
-                                    1 -> "color/system_neutral1_50"
-                                    2 -> "color/system_neutral1_0"
-                                    else -> ""
-                                }
-
-                                val target = "android"
-
-                                val name = when (currentPage.value) {
-                                    0 -> "accent1_100"
-                                    1 -> "neutral1_50"
-                                    2 -> "neutral1_0"
-                                    else -> ""
-                                }
-
-
-                                TabScreen()
-                                BasicContent(
-                                    context = applicationContext,
-                                    info = applicationInfo,
-                                    name = name,
-                                    target = target,
-                                    overlay = overlay
-                                )
-                            }
+                            ColorModsContent(
+                                applicationContext = applicationContext,
+                                applicationInfo = applicationInfo
+                            )
                         }
                     )
                 }
