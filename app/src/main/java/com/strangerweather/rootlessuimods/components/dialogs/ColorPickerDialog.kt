@@ -14,6 +14,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.ExperimentalGraphicsApi
 import androidx.compose.ui.graphics.toArgb
+import androidx.compose.ui.text.android.style.LetterSpacingSpanEm
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.strangerweather.rootlessuimods.components.*
@@ -29,21 +30,25 @@ fun ColorPickerDialog(
     target: String,
     overlay: String,
 ) {
-    AlertDialog(modifier = Modifier.height(600.dp),
+    AlertDialog(
         onDismissRequest = { state.value = false },
         text = {
-            Column(horizontalAlignment = Alignment.CenterHorizontally) {
+            Column(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .padding(top = 20.dp, bottom = 20.dp),
+                horizontalAlignment = Alignment.CenterHorizontally,
+                verticalArrangement = Arrangement.Center
+            ) {
                 ColorTextField(context, name, target, overlay)
                 ColorPicker()
-                Spacer(modifier = Modifier.height(20.dp))
                 ColorCircle()
             }
         },
         buttons = {
             Row(
                 Modifier
-                    .fillMaxWidth()
-                    .padding(bottom = 20.dp),
+                    .fillMaxWidth(),
                 horizontalArrangement = Arrangement.SpaceAround
             ) {
                 Button(
@@ -56,7 +61,7 @@ fun ColorPickerDialog(
                 Button(
                     onClick = {
                         state.value = false
-                        registerLayer(context, name, target, overlay,  resourceValue.value)
+                        registerLayer(context, name, target, overlay, resourceValue.value)
                     }, Modifier.width(100.dp)
                 ) {
                     Text("Confirm")
@@ -65,4 +70,5 @@ fun ColorPickerDialog(
         }
     )
 }
+
 
