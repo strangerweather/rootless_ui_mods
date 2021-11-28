@@ -1,4 +1,4 @@
-package com.strangerweather.rootlessuimods.components
+package com.strangerweather.rootlessuimods.components.composables
 
 import android.content.Context
 import android.content.pm.ApplicationInfo
@@ -21,12 +21,9 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.google.accompanist.pager.ExperimentalPagerApi
 import com.strangerweather.rootlessuimods.R
-import com.strangerweather.rootlessuimods.components.dialogs.ColorPickerDialog
-import com.strangerweather.rootlessuimods.functions.deleteLayer
-import com.strangerweather.rootlessuimods.functions.disableLayer
+import com.strangerweather.rootlessuimods.components.pickers.ColorPickerDialog
 import com.strangerweather.rootlessuimods.functions.enableLayer
 import com.strangerweather.rootlessuimods.functions.removeAndDelete
-import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.runBlocking
 
 @ExperimentalPagerApi

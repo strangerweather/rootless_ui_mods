@@ -10,8 +10,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.ExperimentalGraphicsApi
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.google.accompanist.pager.ExperimentalPagerApi
-import com.strangerweather.rootlessuimods.components.BasicContent
-import com.strangerweather.rootlessuimods.components.TopCardColorMods
+import com.strangerweather.rootlessuimods.components.composables.BasicContent
+import com.strangerweather.rootlessuimods.components.composables.TopCardColorMods
 import com.strangerweather.rootlessuimods.components.tabs.TabScreen
 import com.strangerweather.rootlessuimods.utils.MainViewModel
 

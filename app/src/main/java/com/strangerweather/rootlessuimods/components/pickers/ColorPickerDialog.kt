@@ -1,4 +1,4 @@
-package com.strangerweather.rootlessuimods.components.dialogs
+package com.strangerweather.rootlessuimods.components.pickers
 
 import android.content.Context
 import androidx.compose.foundation.layout.*
@@ -7,20 +7,11 @@ import androidx.compose.material.Button
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
-import androidx.compose.runtime.livedata.observeAsState
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.ExperimentalGraphicsApi
-import androidx.compose.ui.graphics.toArgb
-import androidx.compose.ui.text.android.style.LetterSpacingSpanEm
 import androidx.compose.ui.unit.dp
-import androidx.lifecycle.viewmodel.compose.viewModel
-import com.strangerweather.rootlessuimods.components.*
 import com.strangerweather.rootlessuimods.functions.registerLayer
-import com.strangerweather.rootlessuimods.ui.theme.Purple500
-import com.strangerweather.rootlessuimods.utils.MainViewModel
 
 @ExperimentalGraphicsApi
 @Composable

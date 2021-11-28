@@ -1,4 +1,4 @@
-package com.strangerweather.rootlessuimods.components
+package com.strangerweather.rootlessuimods.components.pickers
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box

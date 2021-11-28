@@ -1,15 +1,10 @@
 package com.strangerweather.rootlessuimods.navigation
 
-import android.graphics.drawable.VectorDrawable
-import androidx.compose.material.Icon
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Fullscreen
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.Palette
 import androidx.compose.ui.graphics.vector.ImageVector
-import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.res.vectorResource
-import com.strangerweather.rootlessuimods.R
 
 sealed class BottomBarScreen(
     val route: String,

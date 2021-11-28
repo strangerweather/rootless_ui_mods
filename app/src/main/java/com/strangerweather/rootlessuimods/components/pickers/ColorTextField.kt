@@ -1,4 +1,4 @@
-package com.strangerweather.rootlessuimods.components
+package com.strangerweather.rootlessuimods.components.pickers
 
 import android.content.Context
 import android.widget.Toast
