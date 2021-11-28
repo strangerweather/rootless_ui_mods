@@ -35,94 +35,12 @@ fun BasicContent(
     name: String,
     target: String,
 ) {
-    LazyColumn(
+    Column(
         Modifier
             .fillMaxSize()
             .background(if (isSystemInDarkTheme()) Color.DarkGray else Color(0xFFF5F5F5))
     ) {
-        item {
-            Card(
-                Modifier
-                    .fillMaxWidth()
-                    .height(150.dp)
-                    .padding(10.dp), elevation = 7.dp
-            ) {
-                Column(
-                    Modifier
-                        .padding(15.dp)
-                        .fillMaxSize(),
-                    horizontalAlignment = Alignment.CenterHorizontally,
-                    verticalArrangement = Arrangement.Center
-                ) {
-                    Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.Center) {
-                        Column(
-                            Modifier.fillMaxWidth(),
-                            horizontalAlignment = Alignment.CenterHorizontally
-                        ) {
-                            OutlinedButton(
-                                onClick = {
-                                    enableLayer(context, info, name, target)
-                                },
-                                Modifier
-                                    .height(50.dp)
-                                    .width(135.dp)
-                            ) {
-                                Text(text = stringResource(id = R.string.activate))
-                            }
-                        }
-                    }
-                }
-            }
-            Card(
-                Modifier
-                    .fillMaxWidth()
-                    .height(150.dp)
-                    .padding(10.dp), elevation = 7.dp
-            ) {
-                Column(
-                    Modifier.fillMaxSize(),
-                    horizontalAlignment = Alignment.CenterHorizontally,
-                    verticalArrangement = Arrangement.Center
-                ) {
-                    OutlinedButton(
-                        onClick = {
-                            runBlocking {
-                                removeAndDelete(context, info, name, target)
-                            }
-                        },
-                        Modifier
-                            .height(50.dp)
-                            .width(135.dp)
-                    ) {
-                        Text(text = stringResource(id = R.string.remove))
-                    }
-                }
-            }
-        }
-    }
-}
 
-@ExperimentalGraphicsApi
-@Composable
-fun TopCardColorMods(
-    context: Context,
-    name: String,
-    target: String,
-    overlay: String
-) {
-    val showAlertDialog = remember { mutableStateOf(false) }
-
-    if (showAlertDialog.value) {
-        AlertDialogView(
-            state = showAlertDialog,
-            context = context,
-            name = name,
-            target = target,
-            overlay = overlay
-        )
-    }
-    Column(Modifier.
-    background(if (isSystemInDarkTheme()) Color.DarkGray else Color(0xFFF5F5F5))) {
         Card(
             Modifier
                 .fillMaxWidth()
@@ -136,18 +54,47 @@ fun TopCardColorMods(
                 horizontalAlignment = Alignment.CenterHorizontally,
                 verticalArrangement = Arrangement.Center
             ) {
-                Column(
-                    Modifier.fillMaxWidth(),
-                    horizontalAlignment = Alignment.CenterHorizontally
-                ) {
-                    OutlinedButton(
-                        onClick = { showAlertDialog.value = true },
-                        Modifier
-                            .height(50.dp)
-                            .width(135.dp),
+                Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.Center) {
+                    Column(
+                        Modifier.fillMaxWidth(),
+                        horizontalAlignment = Alignment.CenterHorizontally
                     ) {
-                        Text(text = stringResource(id = R.string.color_picker))
+                        OutlinedButton(
+                            onClick = {
+                                enableLayer(context, info, name, target)
+                            },
+                            Modifier
+                                .height(50.dp)
+                                .width(135.dp)
+                        ) {
+                            Text(text = stringResource(id = R.string.activate))
+                        }
                     }
+                }
+            }
+        }
+        Card(
+            Modifier
+                .fillMaxWidth()
+                .height(150.dp)
+                .padding(10.dp), elevation = 7.dp
+        ) {
+            Column(
+                Modifier.fillMaxSize(),
+                horizontalAlignment = Alignment.CenterHorizontally,
+                verticalArrangement = Arrangement.Center
+            ) {
+                OutlinedButton(
+                    onClick = {
+                        runBlocking {
+                            removeAndDelete(context, info, name, target)
+                        }
+                    },
+                    Modifier
+                        .height(50.dp)
+                        .width(135.dp)
+                ) {
+                    Text(text = stringResource(id = R.string.remove))
                 }
             }
         }
@@ -155,14 +102,3 @@ fun TopCardColorMods(
 }
 
 
-@ExperimentalGraphicsApi
-@Composable
-fun AlertDialogView(
-    state: MutableState<Boolean>,
-    context: Context,
-    name: String,
-    target: String,
-    overlay: String
-) {
-    ColorPickerDialog(state, context, name, target, overlay)
-}

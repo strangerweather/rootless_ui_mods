@@ -35,13 +35,6 @@ fun ScreenModsContent(
     val type = 5
     val value = 1
 
-//    Column() {
-//        Button(onClick = {
-//            registerLayer(applicationContext, name, target, overlay, type, value)
-//        }) {
-//
-//        }
-
     LazyColumn(
         Modifier
             .fillMaxSize()
@@ -68,7 +61,14 @@ fun ScreenModsContent(
                         ) {
                             OutlinedButton(
                                 onClick = {
-                                    registerLayer(applicationContext, name, target, overlay, type, value)
+                                    registerLayer(
+                                        applicationContext,
+                                        name,
+                                        target,
+                                        overlay,
+                                        type,
+                                        value
+                                    )
                                 },
                                 Modifier
                                     .height(50.dp)
@@ -81,11 +81,14 @@ fun ScreenModsContent(
                 }
             }
         }
+        item {
+            BasicContent(
+                context = applicationContext,
+                info = applicationInfo,
+                name = name,
+                target = target
+            )
+        }
     }
-    BasicContent(
-        context = applicationContext,
-        info = applicationInfo,
-        name = name,
-        target = target
-    )
 }
+

@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.pm.ApplicationInfo
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Modifier
@@ -19,10 +20,11 @@ import com.strangerweather.rootlessuimods.utils.MainViewModel
 @ExperimentalPagerApi
 @Composable
 fun ColorModsContent(applicationContext: Context, applicationInfo: ApplicationInfo) {
-    Column(Modifier.fillMaxSize()) {
-        val viewModel: MainViewModel = viewModel()
-        val currentPage = viewModel.page.observeAsState()
 
+    val viewModel: MainViewModel = viewModel()
+    val currentPage = viewModel.page.observeAsState()
+
+    LazyColumn(Modifier.fillMaxSize()) {
         val overlay = when (currentPage.value) {
             0 -> "color/system_accent1_100"
             1 -> "color/system_neutral1_50"
@@ -39,18 +41,20 @@ fun ColorModsContent(applicationContext: Context, applicationInfo: ApplicationIn
             else -> ""
         }
 
-        TabScreen()
-        TopCardColorMods(
-            context = applicationContext,
-            name = name,
-            target = target,
-            overlay = overlay
-        )
-        BasicContent(
-            context = applicationContext,
-            info = applicationInfo,
-            name = name,
-            target = target
-        )
+        item {
+            TabScreen()
+            TopCardColorMods(
+                context = applicationContext,
+                name = name,
+                target = target,
+                overlay = overlay
+            )
+            BasicContent(
+                context = applicationContext,
+                info = applicationInfo,
+                name = name,
+                target = target
+            )
+        }
     }
 }
