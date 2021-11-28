@@ -19,6 +19,7 @@ import androidx.compose.ui.unit.dp
 import com.google.accompanist.pager.ExperimentalPagerApi
 import com.strangerweather.rootlessuimods.R
 import com.strangerweather.rootlessuimods.components.composables.BasicContent
+import com.strangerweather.rootlessuimods.components.tabs.ScreenModsTabScreen
 import com.strangerweather.rootlessuimods.functions.registerLayer
 
 @ExperimentalPagerApi
@@ -41,6 +42,7 @@ fun ScreenModsContent(
             .background(if (isSystemInDarkTheme()) Color.DarkGray else Color(0xFFF5F5F5))
     ) {
         item {
+            ScreenModsTabScreen()
             Card(
                 Modifier
                     .fillMaxWidth()

@@ -12,7 +12,7 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import com.google.accompanist.pager.ExperimentalPagerApi
 import com.strangerweather.rootlessuimods.components.composables.BasicContent
 import com.strangerweather.rootlessuimods.components.composables.TopCardColorMods
-import com.strangerweather.rootlessuimods.components.tabs.ColorTabScreen
+import com.strangerweather.rootlessuimods.components.tabs.ColorModsTabScreen
 import com.strangerweather.rootlessuimods.utils.MainViewModel
 
 @ExperimentalGraphicsApi
@@ -41,7 +41,7 @@ fun ColorModsContent(applicationContext: Context, applicationInfo: ApplicationIn
         }
 
         item {
-            ColorTabScreen()
+            ColorModsTabScreen()
             TopCardColorMods(
                 context = applicationContext,
                 name = name,
