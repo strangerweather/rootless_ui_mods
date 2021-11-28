@@ -2,14 +2,8 @@ package com.strangerweather.rootlessuimods.components.tabs
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.height
-import androidx.compose.material.Tab
-import androidx.compose.material.TabRow
-import androidx.compose.material.TabRowDefaults
-import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
@@ -19,22 +13,21 @@ import com.google.accompanist.pager.PagerState
 import com.google.accompanist.pager.rememberPagerState
 import com.strangerweather.rootlessuimods.R
 import com.strangerweather.rootlessuimods.utils.MainViewModel
-import kotlinx.coroutines.launch
 
 @ExperimentalPagerApi
 @Composable
-fun TabScreen() {
+fun ColorTabScreen() {
     val pagerState = rememberPagerState(initialPage = 0)
     Column(Modifier.height(200.dp)) {
-        Tabs(pagerState)
-        TabsContent(pagerState)
+        Tabs(pagerState, listOf("Accent", "Drawers", "Text"))
+        ColorTabsContent(pagerState)
     }
 
 }
 
 @ExperimentalPagerApi
 @Composable
-fun TabsContent(pagerState: PagerState) {
+fun ColorTabsContent(pagerState: PagerState) {
 
     val viewModel: MainViewModel = viewModel()
 
@@ -57,36 +50,5 @@ fun TabsContent(pagerState: PagerState) {
             )
         }
         viewModel.onPageChanged(currentPage)
-    }
-}
-
-@ExperimentalPagerApi
-@Composable
-fun Tabs(pagerState: PagerState) {
-    val list = listOf("Accent", "Drawers", "Text")
-    val scope = rememberCoroutineScope()
-
-    TabRow(selectedTabIndex = pagerState.currentPage, divider = {
-        TabRowDefaults.Divider(
-            thickness = 2.dp,
-            color = Color.DarkGray
-        )
-    }) {
-        list.forEachIndexed { index, _ ->
-
-            Tab(selected = pagerState.currentPage == index,
-                onClick = {
-                    scope.launch {
-                        pagerState.animateScrollToPage(index)
-                    }
-                },
-                text = {
-                    Text(
-                        list[index],
-                        color = if (pagerState.currentPage == index) Color.White else Color.LightGray
-                    )
-                }
-            )
-        }
     }
 }

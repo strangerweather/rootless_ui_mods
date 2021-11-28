@@ -80,8 +80,6 @@ fun ScreenModsContent(
                     }
                 }
             }
-        }
-        item {
             BasicContent(
                 context = applicationContext,
                 info = applicationInfo,

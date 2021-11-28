@@ -2,7 +2,6 @@ package com.strangerweather.rootlessuimods.content
 
 import android.content.Context
 import android.content.pm.ApplicationInfo
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.runtime.Composable
@@ -13,7 +12,7 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import com.google.accompanist.pager.ExperimentalPagerApi
 import com.strangerweather.rootlessuimods.components.composables.BasicContent
 import com.strangerweather.rootlessuimods.components.composables.TopCardColorMods
-import com.strangerweather.rootlessuimods.components.tabs.TabScreen
+import com.strangerweather.rootlessuimods.components.tabs.ColorTabScreen
 import com.strangerweather.rootlessuimods.utils.MainViewModel
 
 @ExperimentalGraphicsApi
@@ -42,7 +41,7 @@ fun ColorModsContent(applicationContext: Context, applicationInfo: ApplicationIn
         }
 
         item {
-            TabScreen()
+            ColorTabScreen()
             TopCardColorMods(
                 context = applicationContext,
                 name = name,
