@@ -23,4 +23,6 @@
     <string name="tab1_instr_2">Apply</string>
     <string name="color_picker">Color Picker</string>
     <string name="color_presets">Color Presets</string>
+    <string name="nb_frame_height">Remove Pill</string>
+    <string name="nb_height">Remove Bar</string>
 </resources>
