@@ -40,12 +40,36 @@ fun BasicContent(
             .fillMaxSize()
             .background(if (isSystemInDarkTheme()) Color.DarkGray else Color(0xFFF5F5F5))
     ) {
-        ActivateButton(context = context, info = info, name = name, target = target)
-        RemoveButton(context = context, info = info, name = name, target = target)
-
+        Card(
+            Modifier
+                .fillMaxWidth()
+                .height(150.dp)
+                .padding(10.dp), elevation = 7.dp
+        ) {
+            Column(
+                Modifier.fillMaxSize(),
+                horizontalAlignment = Alignment.CenterHorizontally,
+                verticalArrangement = Arrangement.Center
+            ) {
+                ActivateButton(context = context, info = info, name = name, target = target)
+            }
+        }
+        Card(
+            Modifier
+                .fillMaxWidth()
+                .height(150.dp)
+                .padding(10.dp), elevation = 7.dp
+        ) {
+            Column(
+                Modifier.fillMaxSize(),
+                horizontalAlignment = Alignment.CenterHorizontally,
+                verticalArrangement = Arrangement.Center
+            ) {
+                RemoveButton(context = context, info = info, name = name, target = target)
+            }
+        }
     }
 }
-
 
 @Composable
 fun ActivateButton(
@@ -54,37 +78,15 @@ fun ActivateButton(
     name: String,
     target: String,
 ) {
-    Card(
+    OutlinedButton(
+        onClick = {
+            enableLayer(context, info, name, target)
+        },
         Modifier
-            .fillMaxWidth()
-            .height(150.dp)
-            .padding(10.dp), elevation = 7.dp
+            .height(50.dp)
+            .width(135.dp)
     ) {
-        Column(
-            Modifier
-                .padding(15.dp)
-                .fillMaxSize(),
-            horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.Center
-        ) {
-            Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.Center) {
-                Column(
-                    Modifier.fillMaxWidth(),
-                    horizontalAlignment = Alignment.CenterHorizontally
-                ) {
-                    OutlinedButton(
-                        onClick = {
-                            enableLayer(context, info, name, target)
-                        },
-                        Modifier
-                            .height(50.dp)
-                            .width(135.dp)
-                    ) {
-                        Text(text = stringResource(id = R.string.activate))
-                    }
-                }
-            }
-        }
+        Text(text = stringResource(id = R.string.activate))
     }
 }
 
@@ -96,29 +98,17 @@ fun RemoveButton(
     name: String,
     target: String,
 ) {
-    Card(
-        Modifier
-            .fillMaxWidth()
-            .height(150.dp)
-            .padding(10.dp), elevation = 7.dp
-    ) {
-        Column(
-            Modifier.fillMaxSize(),
-            horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.Center
-        ) {
-            OutlinedButton(
-                onClick = {
-                    runBlocking {
-                        removeAndDelete(context, info, name, target)
-                    }
-                },
-                Modifier
-                    .height(50.dp)
-                    .width(135.dp)
-            ) {
-                Text(text = stringResource(id = R.string.remove))
+    OutlinedButton(
+        onClick = {
+            runBlocking {
+                removeAndDelete(context, info, name, target)
             }
-        }
+        },
+        Modifier
+            .height(50.dp)
+            .width(135.dp)
+    ) {
+        Text(text = stringResource(id = R.string.remove))
     }
 }
+

@@ -20,6 +20,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.google.accompanist.pager.ExperimentalPagerApi
 import com.strangerweather.rootlessuimods.R
+import com.strangerweather.rootlessuimods.components.composables.ActivateButton
 import com.strangerweather.rootlessuimods.components.composables.BasicContent
 import com.strangerweather.rootlessuimods.components.pickers.resourceValue
 import com.strangerweather.rootlessuimods.components.tabs.ScreenModsTabScreen
@@ -42,45 +43,12 @@ fun ScreenModsContent(
     ) {
         item {
             ScreenModsTabScreen()
-            Card(
-                Modifier
-                    .fillMaxWidth()
-                    .height(150.dp)
-                    .padding(10.dp), elevation = 7.dp
-            ) {
-                Row(
-                    Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.Center,
-                    verticalAlignment = Alignment.CenterVertically
-                ) {
-                    RegisterButton(
-                        buttonName = stringResource(id = R.string.nb_frame_height),
-                        registerLayer = {
-                            registerLayer(
-                                context = applicationContext,
-                                name = "navigation_bar_frame_height",
-                                target = target,
-                                overlay = "dimen/navigation_bar_frame_height",
-                                type = type,
-                                value = 0
-                            )
-                        }
-                    )
-                    Spacer(modifier = Modifier.width(30.dp))
-                    RegisterButton(
-                        buttonName = stringResource(id = R.string.nb_height),
-                        registerLayer = {
-                            registerLayer(
-                                context = applicationContext,
-                                name = "navigation_bar_height",
-                                target = target,
-                                overlay = "dimen/navigation_bar_height",
-                                type = type,
-                                value = 1
-                            )
-                        }
-                    )
-                }
-            }
+            TopButtonsCard(applicationContext = applicationContext, target = target, type = type)
+            MiddleButtonsCard(
+                applicationContext = applicationContext,
+                applicationInfo = applicationInfo,
+                target = target
+            )
         }
     }
 }
@@ -100,5 +68,86 @@ fun RegisterButton(
             .width(135.dp)
     ) {
         Text(text = buttonName, textAlign = TextAlign.Center)
+    }
+}
+
+@Composable
+fun TopButtonsCard(
+    applicationContext: Context,
+    target: String,
+    type: Int
+) {
+    Card(
+        Modifier
+            .fillMaxWidth()
+            .height(150.dp)
+            .padding(10.dp), elevation = 7.dp
+    ) {
+        Row(
+            Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.Center,
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            RegisterButton(
+                buttonName = stringResource(id = R.string.nb_frame_height),
+                registerLayer = {
+                    registerLayer(
+                        context = applicationContext,
+                        name = "navigation_bar_frame_height",
+                        target = target,
+                        overlay = "dimen/navigation_bar_frame_height",
+                        type = type,
+                        value = 0
+                    )
+                }
+            )
+            Spacer(modifier = Modifier.width(30.dp))
+            RegisterButton(
+                buttonName = stringResource(id = R.string.nb_height),
+                registerLayer = {
+                    registerLayer(
+                        context = applicationContext,
+                        name = "navigation_bar_height",
+                        target = target,
+                        overlay = "dimen/navigation_bar_height",
+                        type = type,
+                        value = 1
+                    )
+                }
+            )
+        }
+
+    }
+}
+
+@Composable
+fun MiddleButtonsCard(
+    applicationContext: Context,
+    applicationInfo: ApplicationInfo,
+    target: String,
+) {
+    Card(
+        Modifier
+            .fillMaxWidth()
+            .height(150.dp)
+            .padding(10.dp), elevation = 7.dp
+    ) {
+        Row(
+            Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.Center,
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            ActivateButton(
+                context = applicationContext,
+                info = applicationInfo,
+                name = "navigation_bar_frame_height",
+                target = target
+            )
+            Spacer(modifier = Modifier.width(30.dp))
+            ActivateButton(
+                context = applicationContext,
+                info = applicationInfo,
+                name = "navigation_bar_height",
+                target = target
+            )
+        }
     }
 }
