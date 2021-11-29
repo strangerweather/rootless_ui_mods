@@ -20,7 +20,6 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.google.accompanist.pager.ExperimentalPagerApi
 import com.strangerweather.rootlessuimods.R
-import com.strangerweather.rootlessuimods.components.composables.ActivateButton
 import com.strangerweather.rootlessuimods.components.composables.BasicContent
 import com.strangerweather.rootlessuimods.components.pickers.resourceValue
 import com.strangerweather.rootlessuimods.components.tabs.ScreenModsTabScreen
@@ -43,64 +42,48 @@ fun ScreenModsContent(
     ) {
         item {
             ScreenModsTabScreen()
+            Card(
+                Modifier
+                    .fillMaxWidth()
+                    .height(150.dp)
+                    .padding(10.dp), elevation = 7.dp
+            ) {
+                Row(
+                    Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.Center,
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+                    RegisterButton(
+                        buttonName = stringResource(id = R.string.nb_frame_height),
+                        registerLayer = {
+                            registerLayer(
+                                context = applicationContext,
+                                name = "navigation_bar_frame_height",
+                                target = target,
+                                overlay = "dimen/navigation_bar_frame_height",
+                                type = type,
+                                value = 0
+                            )
+                        }
+                    )
+                    Spacer(modifier = Modifier.width(30.dp))
+                    RegisterButton(
+                        buttonName = stringResource(id = R.string.nb_height),
+                        registerLayer = {
+                            registerLayer(
+                                context = applicationContext,
+                                name = "navigation_bar_height",
+                                target = target,
+                                overlay = "dimen/navigation_bar_height",
+                                type = type,
+                                value = 1
+                            )
+                        }
+                    )
+                }
+            }
         }
     }
 }
-//            Card(
-//                Modifier
-//                    .fillMaxWidth()
-//                    .height(150.dp)
-//                    .padding(10.dp), elevation = 7.dp
-//            ) {
-//
-//                            Row {
-//                                RegisterButton(
-//                                    buttonName = stringResource(id = R.string.nb_frame_height),
-//                                    registerLayer = {
-//                                        registerLayer(
-//                                            context = applicationContext,
-//                                            name = "navigation_bar_frame_height",
-//                                            target = target,
-//                                            overlay = "dimen/navigation_bar_frame_height",
-//                                            type = type,
-//                                            value = 0
-//                                        )
-//                                    }
-//                                )
-//                                Spacer(modifier = Modifier.width(30.dp))
-//                                ActivateButton(
-//                                    context = applicationContext,
-//                                    info = applicationInfo,
-//                                    name = "navigation_bar_frame_height",
-//                                    target = target
-//                                )
-//                            }
-//                        }
-//                    }
-//                }
-//                Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.Center) {
-//                    Column(
-//                        Modifier.fillMaxWidth(),
-//                        horizontalAlignment = Alignment.CenterHorizontally
-//                    ) {
-//                        Row {
-//                            RegisterButton(
-//                                buttonName = stringResource(id = R.string.nb_height),
-//                                registerLayer = {
-//                                    registerLayer(
-//                                        context = applicationContext,
-//                                        name = "navigation_bar_height",
-//                                        target = target,
-//                                        overlay = "dimen/navigation_bar_height",
-//                                        type = type,
-//                                        value = 1
-//                                    )
-//                                }
-//                            )
-//                        }
-//                    }
-//                }
-//            }
 
 
 @Composable
