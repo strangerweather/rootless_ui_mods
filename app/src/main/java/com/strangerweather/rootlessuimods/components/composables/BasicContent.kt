@@ -65,7 +65,13 @@ fun BasicContent(
                 horizontalAlignment = Alignment.CenterHorizontally,
                 verticalArrangement = Arrangement.Center
             ) {
-                RemoveButton(context = context, info = info, name = name, target = target)
+                RemoveButton(
+                    context = context,
+                    info = info,
+                    name = name,
+                    target = target,
+                    buttonName = stringResource(id = R.string.remove)
+                )
             }
         }
     }
@@ -97,6 +103,7 @@ fun RemoveButton(
     info: ApplicationInfo,
     name: String,
     target: String,
+    buttonName: String
 ) {
     OutlinedButton(
         onClick = {
@@ -108,7 +115,7 @@ fun RemoveButton(
             .height(50.dp)
             .width(135.dp)
     ) {
-        Text(text = stringResource(id = R.string.remove))
+        Text(text = buttonName)
     }
 }
 

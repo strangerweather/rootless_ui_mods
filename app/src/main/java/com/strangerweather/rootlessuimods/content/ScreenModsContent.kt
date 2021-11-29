@@ -14,16 +14,13 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ExperimentalGraphicsApi
-import androidx.compose.ui.layout.layoutId
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.google.accompanist.pager.ExperimentalPagerApi
 import com.strangerweather.rootlessuimods.R
 import com.strangerweather.rootlessuimods.components.composables.ActivateButton
-import com.strangerweather.rootlessuimods.components.composables.BasicContent
 import com.strangerweather.rootlessuimods.components.composables.RemoveButton
-import com.strangerweather.rootlessuimods.components.pickers.resourceValue
 import com.strangerweather.rootlessuimods.components.tabs.ScreenModsTabScreen
 import com.strangerweather.rootlessuimods.functions.registerLayer
 
@@ -44,17 +41,26 @@ fun ScreenModsContent(
     ) {
         item {
             ScreenModsTabScreen()
-            TopButtonsCard(applicationContext = applicationContext, target = target, type = type)
-            MiddleButtonsCard(
-                applicationContext = applicationContext,
-                applicationInfo = applicationInfo,
-                target = target
-            )
-            BottomButtonsCard(
-                applicationContext = applicationContext,
-                applicationInfo = applicationInfo,
-                target = target
-            )
+            Spacer(modifier = Modifier.height(30.dp))
+            Row(
+                Modifier
+                    .fillMaxSize(),
+                horizontalArrangement = Arrangement.Center,
+            ) {
+                RemovePillCard(
+                    applicationContext = applicationContext,
+                    applicationInfo = applicationInfo,
+                    target = target,
+                    type = type
+                )
+                Spacer(modifier = Modifier.width(10.dp))
+                RemoveBarCard(
+                    applicationContext = applicationContext,
+                    applicationInfo = applicationInfo,
+                    target = target,
+                    type = type
+                )
+            }
         }
     }
 }
@@ -78,20 +84,15 @@ fun RegisterButton(
 }
 
 @Composable
-fun TopButtonsCard(
+fun RemovePillCard(
     applicationContext: Context,
+    applicationInfo: ApplicationInfo,
     target: String,
     type: Int
 ) {
-    Card(
-        Modifier
-            .fillMaxWidth()
-            .height(150.dp)
-            .padding(10.dp), elevation = 7.dp
-    ) {
-        Row(
-            Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.Center,
-            verticalAlignment = Alignment.CenterVertically
+    Card(elevation = 7.dp) {
+        Column(
+            Modifier.padding(15.dp)
         ) {
             RegisterButton(
                 buttonName = stringResource(id = R.string.nb_frame_height),
@@ -106,7 +107,36 @@ fun TopButtonsCard(
                     )
                 }
             )
-            Spacer(modifier = Modifier.width(30.dp))
+            Spacer(modifier = Modifier.height(30.dp))
+            ActivateButton(
+                context = applicationContext,
+                info = applicationInfo,
+                name = "navigation_bar_frame_height",
+                target = target
+            )
+            Spacer(modifier = Modifier.height(30.dp))
+            RemoveButton(
+                context = applicationContext,
+                info = applicationInfo,
+                name = "navigation_bar_frame_height",
+                target = target,
+                buttonName = stringResource(id = R.string.undo)
+            )
+        }
+    }
+}
+
+@Composable
+fun RemoveBarCard(
+    applicationContext: Context,
+    applicationInfo: ApplicationInfo,
+    target: String,
+    type: Int
+) {
+    Card(elevation = 7.dp) {
+        Column(
+            Modifier.padding(15.dp)
+        ) {
             RegisterButton(
                 buttonName = stringResource(id = R.string.nb_height),
                 registerLayer = {
@@ -120,72 +150,20 @@ fun TopButtonsCard(
                     )
                 }
             )
-        }
-
-    }
-}
-
-@Composable
-fun MiddleButtonsCard(
-    applicationContext: Context,
-    applicationInfo: ApplicationInfo,
-    target: String,
-) {
-    Card(
-        Modifier
-            .fillMaxWidth()
-            .height(150.dp)
-            .padding(10.dp), elevation = 7.dp
-    ) {
-        Row(
-            Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.Center,
-            verticalAlignment = Alignment.CenterVertically
-        ) {
-            ActivateButton(
-                context = applicationContext,
-                info = applicationInfo,
-                name = "navigation_bar_frame_height",
-                target = target
-            )
-            Spacer(modifier = Modifier.width(30.dp))
+            Spacer(modifier = Modifier.height(30.dp))
             ActivateButton(
                 context = applicationContext,
                 info = applicationInfo,
                 name = "navigation_bar_height",
                 target = target
             )
-        }
-    }
-}
-
-@Composable
-fun BottomButtonsCard(
-    applicationContext: Context,
-    applicationInfo: ApplicationInfo,
-    target: String,
-) {
-    Card(
-        Modifier
-            .fillMaxWidth()
-            .height(150.dp)
-            .padding(10.dp), elevation = 7.dp
-    ) {
-        Row(
-            Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.Center,
-            verticalAlignment = Alignment.CenterVertically
-        ) {
-            RemoveButton(
-                context = applicationContext,
-                info = applicationInfo,
-                name = "navigation_bar_frame_height",
-                target = target
-            )
-            Spacer(modifier = Modifier.width(30.dp))
+            Spacer(modifier = Modifier.height(30.dp))
             RemoveButton(
                 context = applicationContext,
                 info = applicationInfo,
                 name = "navigation_bar_height",
-                target = target
+                target = target,
+                buttonName = stringResource(id = R.string.undo)
             )
         }
     }
