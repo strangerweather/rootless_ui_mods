@@ -15,6 +15,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ExperimentalGraphicsApi
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.google.accompanist.pager.ExperimentalPagerApi
@@ -41,7 +42,7 @@ fun ScreenModsContent(
     ) {
         item {
             ScreenModsTabScreen()
-            Spacer(modifier = Modifier.height(30.dp))
+            Spacer(modifier = Modifier.height(10.dp))
             Row(
                 Modifier
                     .fillMaxSize(),
@@ -53,7 +54,7 @@ fun ScreenModsContent(
                     target = target,
                     type = type
                 )
-                Spacer(modifier = Modifier.width(10.dp))
+                Spacer(modifier = Modifier.width(20.dp))
                 RemoveBarCard(
                     applicationContext = applicationContext,
                     applicationInfo = applicationInfo,
@@ -90,10 +91,13 @@ fun RemovePillCard(
     target: String,
     type: Int
 ) {
-    Card(elevation = 7.dp) {
+    Card(modifier = Modifier.height(400.dp), elevation = 7.dp) {
         Column(
-            Modifier.padding(15.dp)
+            Modifier.padding(20.dp),
+            verticalArrangement = Arrangement.SpaceBetween,
+            horizontalAlignment = Alignment.CenterHorizontally
         ) {
+            Text(text = "Remove Pill",  fontWeight = FontWeight.Bold)
             RegisterButton(
                 buttonName = stringResource(id = R.string.nb_frame_height),
                 registerLayer = {
@@ -107,14 +111,12 @@ fun RemovePillCard(
                     )
                 }
             )
-            Spacer(modifier = Modifier.height(30.dp))
             ActivateButton(
                 context = applicationContext,
                 info = applicationInfo,
                 name = "navigation_bar_frame_height",
                 target = target
             )
-            Spacer(modifier = Modifier.height(30.dp))
             RemoveButton(
                 context = applicationContext,
                 info = applicationInfo,
@@ -133,10 +135,13 @@ fun RemoveBarCard(
     target: String,
     type: Int
 ) {
-    Card(elevation = 7.dp) {
+    Card(modifier = Modifier.height(400.dp), elevation = 7.dp) {
         Column(
-            Modifier.padding(15.dp)
+            Modifier.padding(20.dp),
+            verticalArrangement = Arrangement.SpaceBetween,
+            horizontalAlignment = Alignment.CenterHorizontally
         ) {
+            Text(text = "Remove NavBar",  fontWeight = FontWeight.Bold)
             RegisterButton(
                 buttonName = stringResource(id = R.string.nb_height),
                 registerLayer = {
@@ -150,14 +155,12 @@ fun RemoveBarCard(
                     )
                 }
             )
-            Spacer(modifier = Modifier.height(30.dp))
             ActivateButton(
                 context = applicationContext,
                 info = applicationInfo,
                 name = "navigation_bar_height",
                 target = target
             )
-            Spacer(modifier = Modifier.height(30.dp))
             RemoveButton(
                 context = applicationContext,
                 info = applicationInfo,
