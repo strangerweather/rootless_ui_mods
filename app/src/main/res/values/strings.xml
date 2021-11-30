@@ -25,5 +25,7 @@
     <string name="color_presets">Color Presets</string>
     <string name="nb_frame_height">Select Pill</string>
     <string name="nb_height">Select NavBar</string>
+    <string name="remove_nb">Remove NavBar</string>
+    <string name="remove_pill">Remove Pill</string>
     <string name="undo">Undo</string>
 </resources>

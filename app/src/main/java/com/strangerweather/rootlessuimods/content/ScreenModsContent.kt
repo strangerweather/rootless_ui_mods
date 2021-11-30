@@ -97,7 +97,7 @@ fun RemovePillCard(
             verticalArrangement = Arrangement.SpaceBetween,
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            Text(text = "Remove Pill",  fontWeight = FontWeight.Bold)
+            Text(text = stringResource(id = R.string.remove_pill), fontWeight = FontWeight.Bold)
             RegisterButton(
                 buttonName = stringResource(id = R.string.nb_frame_height),
                 registerLayer = {
@@ -141,7 +141,7 @@ fun RemoveBarCard(
             verticalArrangement = Arrangement.SpaceBetween,
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            Text(text = "Remove NavBar",  fontWeight = FontWeight.Bold)
+            Text(text = stringResource(id = R.string.remove_nb), fontWeight = FontWeight.Bold)
             RegisterButton(
                 buttonName = stringResource(id = R.string.nb_height),
                 registerLayer = {
