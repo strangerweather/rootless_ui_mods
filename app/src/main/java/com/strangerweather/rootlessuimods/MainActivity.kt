@@ -18,6 +18,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.google.accompanist.pager.ExperimentalPagerApi
+import com.strangerweather.rootlessuimods.components.composables.ShizukuDialog
 import com.strangerweather.rootlessuimods.navigation.BottomBarScreen
 import com.strangerweather.rootlessuimods.navigation.BottomNavGraph
 import com.strangerweather.rootlessuimods.ui.theme.RootlessUIModsTheme
@@ -59,17 +60,18 @@ class MainActivity : ComponentActivity() {
                 }
             }
         } else {
-            showShizukuDialog(this)
+            showShizukuDialog()
         }
     }
 
-    private fun showShizukuDialog(context: Context) {
-        val builder = AlertDialog.Builder(context)
-        builder.setTitle(R.string.shizuku_needed_title)
-            .setMessage(R.string.shizuku_needed_text)
-            .setCancelable(false)
-            .create()
-            .show()
+    private fun showShizukuDialog() {
+        setContent {
+            RootlessUIModsTheme {
+                Surface(color = MaterialTheme.colors.background) {
+                    ShizukuDialog()
+                }
+            }
+        }
     }
 
     @ExperimentalPagerApi
