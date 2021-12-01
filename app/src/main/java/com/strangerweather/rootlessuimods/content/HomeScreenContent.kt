@@ -26,54 +26,7 @@ import com.strangerweather.rootlessuimods.ui.theme.Purple200
 @Composable
 fun HomeScreen() {
 
-    val intent = remember {
-        Intent(
-            Intent.ACTION_VIEW,
-            Uri.parse("https://play.google.com/store/apps/details?id=moe.shizuku.privileged.api")
-        )
-    }
-    val context = LocalContext.current
 
-    Column(
-        Modifier
-            .fillMaxSize(),
-        verticalArrangement = Arrangement.SpaceBetween,
-        horizontalAlignment = Alignment.CenterHorizontally
-    ) {
-        Text(
-            text = stringResource(id = R.string.home_screen_title),
-            style = TextStyle(
-                fontSize = 22.sp,
-                fontWeight = FontWeight.Bold
-            ),
-            modifier = Modifier
-                .padding(20.dp)
-                .border(
-                    width = 0.5.dp,
-                    color = (if (isSystemInDarkTheme()) Color.White else Color.Black)
-                )
-                .padding(20.dp),
-        )
-        Text(
-            text = stringResource(id = R.string.home_screen_text1),
-            Modifier.padding(start = 20.dp, end = 20.dp),
-            textAlign = TextAlign.Center
-        )
-        Text(
-            modifier = Modifier
-                .clickable { context.startActivity(intent) }
-                .border(width = 2.dp, color = Purple200)
-                .padding(20.dp),
-            text = "Get Shizuku",
-            color = Purple200,
-            fontSize = 20.sp
-        )
-        Text(
-            text = stringResource(id = R.string.home_screen_credits),
-            textAlign = TextAlign.Center,
-            modifier = Modifier.padding(bottom = 100.dp)
-        )
-    }
 }
 
 
