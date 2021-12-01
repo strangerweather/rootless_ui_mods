@@ -29,6 +29,6 @@
     <string name="remove_pill">Remove Pill</string>
     <string name="undo">Undo</string>
     <string name="home_screen_title">"Welcome to Rootless UI Mods"</string>
-    <string name="home_screen_text1">To use this app, please install the Shizuku app from the Playstore first.</string>
-<!--    <string name="home_screen_link">"https://play.google.com/store/apps/details?id=moe.shizuku.privileged.api"</string>-->
+    <string name="home_screen_text1">To use this app, please install and start the Shizuku app from the Playstore first.</string>
+    <string name="home_screen_credits">Credits:\nRikkaW for Shizuku\nZacharee for the FabricateOverlay Library</string>
 </resources>
