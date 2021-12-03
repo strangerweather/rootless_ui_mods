@@ -46,7 +46,7 @@ fun TopCardColorMods(
             Modifier
                 .fillMaxWidth()
                 .height(150.dp)
-                .padding(10.dp), elevation = 7.dp
+                .padding(10.dp), elevation = 2.dp
         ) {
             Column(
                 Modifier

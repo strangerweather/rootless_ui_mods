@@ -44,7 +44,7 @@ fun BasicContent(
             Modifier
                 .fillMaxWidth()
                 .height(150.dp)
-                .padding(10.dp), elevation = 7.dp
+                .padding(10.dp), elevation = 2.dp
         ) {
             Column(
                 Modifier.fillMaxSize(),
@@ -58,7 +58,7 @@ fun BasicContent(
             Modifier
                 .fillMaxWidth()
                 .height(150.dp)
-                .padding(10.dp), elevation = 7.dp
+                .padding(10.dp), elevation = 2.dp
         ) {
             Column(
                 Modifier.fillMaxSize(),
@@ -74,6 +74,7 @@ fun BasicContent(
                 )
             }
         }
+        Spacer(modifier = Modifier.height(150.dp))
     }
 }
 
