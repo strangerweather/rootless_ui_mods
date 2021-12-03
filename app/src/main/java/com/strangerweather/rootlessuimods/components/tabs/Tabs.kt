@@ -20,7 +20,7 @@ import com.strangerweather.rootlessuimods.ui.theme.Purple500
 
 
 @Composable
-fun ColorTabs(tabTitle: String, tabText: String) {
+fun Tabs(tabTitle: String, tabText: String) {
     Column(
         Modifier
             .fillMaxSize()

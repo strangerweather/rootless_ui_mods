@@ -19,7 +19,7 @@ import com.strangerweather.rootlessuimods.utils.MainViewModel
 fun ScreenModsTabScreen() {
     val pagerState = rememberPagerState(initialPage = 0)
     Column(Modifier.height(200.dp)) {
-        GenericTabScreen(pagerState, listOf("Pill", "?", "?", "?", "?"))
+        GenericTabScreen(pagerState, listOf("Pill", "NavBar", "Battery"))
         ScreenModsTabsContent(pagerState)
     }
 
@@ -33,22 +33,22 @@ fun ScreenModsTabsContent(pagerState: PagerState) {
 
     HorizontalPager(state = pagerState, count = 3) { page ->
         when (page) {
-            0 -> ColorTabs(
+            0 -> Tabs(
                 tabTitle = stringResource(id = R.string.tab1_screen_title), tabText = stringResource(
                     id = R.string.tab1_screen_explanation
                 )
             )
-            1 -> ColorTabs(
+            1 -> Tabs(
                 tabTitle = stringResource(id = R.string.tab2_screen_title), tabText = stringResource(
                     id = R.string.tab2_screen_explanation
                 )
             )
-            2 -> ColorTabs(
+            2 -> Tabs(
                 tabTitle = stringResource(id = R.string.tab3_screen_title), tabText = stringResource(
                     id = R.string.tab3_screen_explanation
                 )
             )
         }
-        viewModel.onPageChanged(currentPage)
+        viewModel.onScreenPageChanged(currentPage)
     }
 }

@@ -21,7 +21,7 @@ import com.strangerweather.rootlessuimods.utils.MainViewModel
 fun ColorModsContent(applicationContext: Context, applicationInfo: ApplicationInfo) {
 
     val viewModel: MainViewModel = viewModel()
-    val currentPage = viewModel.page.observeAsState()
+    val currentPage = viewModel.colorPage.observeAsState()
 
     LazyColumn(Modifier.fillMaxSize()) {
         val overlay = when (currentPage.value) {

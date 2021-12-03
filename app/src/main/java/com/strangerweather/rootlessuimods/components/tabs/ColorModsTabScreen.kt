@@ -33,22 +33,22 @@ fun ColorModsTabsContent(pagerState: PagerState) {
 
     HorizontalPager(state = pagerState, count = 3) { page ->
         when (page) {
-            0 -> ColorTabs(
+            0 -> Tabs(
                 tabTitle = stringResource(id = R.string.tab1_color_title), tabText = stringResource(
                     id = R.string.tab1_color_explanation
                 )
             )
-            1 -> ColorTabs(
+            1 -> Tabs(
                 tabTitle = stringResource(id = R.string.tab2_color_title), tabText = stringResource(
                     id = R.string.tab2_color_explanation
                 )
             )
-            2 -> ColorTabs(
+            2 -> Tabs(
                 tabTitle = stringResource(id = R.string.tab3_color_title), tabText = stringResource(
                     id = R.string.tab3_color_explanation
                 )
             )
         }
-        viewModel.onPageChanged(currentPage)
+        viewModel.onColorPageChanged(currentPage)
     }
 }

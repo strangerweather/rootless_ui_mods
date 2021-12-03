@@ -6,9 +6,13 @@ import androidx.lifecycle.MutableLiveData
 
 class MainViewModel(application: Application) : AndroidViewModel(application) {
 
-    val page = MutableLiveData(0)
+    val colorPage = MutableLiveData(0)
+    fun onColorPageChanged(newColorValue: Int) {
+        colorPage.value = newColorValue
+    }
 
-    fun onPageChanged(newValue: Int) {
-        page.value = newValue
+    val screenPage = MutableLiveData(0)
+    fun onScreenPageChanged(newScreenValue: Int) {
+        screenPage.value = newScreenValue
     }
 }
