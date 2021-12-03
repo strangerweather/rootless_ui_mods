@@ -33,17 +33,22 @@ fun ScreenModsContent(
         val overlay = when (currentPage.value) {
             0 -> "dimen/navigation_bar_frame_height"
             1 -> "dimen/navigation_bar_height"
-//            2 -> "color/system_neutral1_0"
+            2 -> "dimen/status_bar_battery_icon_width"
             else -> ""
         }
 
-        val target = "android"
+        val target = when (currentPage.value) {
+            0 -> "android"
+            1 -> "android"
+            2 -> "com.android.systemui"
+            else -> ""
+        }
         val type = 5
 
         val name = when (currentPage.value) {
             0 -> "navigation_bar_frame_height"
             1 -> "navigation_bar_height"
-//            2 -> "neutral1_0"
+            2 -> "status_bar_battery_icon_width"
             else -> ""
         }
 
@@ -51,7 +56,7 @@ fun ScreenModsContent(
         val value = when (currentPage.value) {
             0 -> 0
             1 -> 1
-//            2 -> "neutral1_0"
+            2 -> 0
             else -> -1
         }
 
