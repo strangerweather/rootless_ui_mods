@@ -2,11 +2,13 @@ package com.strangerweather.rootlessuimods.functions
 
 import android.content.Context
 import android.content.pm.ApplicationInfo
+import android.widget.Toast
 import kotlinx.coroutines.coroutineScope
 import tk.zwander.fabricateoverlay.FabricatedOverlay
 import tk.zwander.fabricateoverlay.FabricatedOverlayEntry
 import tk.zwander.fabricateoverlay.OverlayAPI
 
+var isRegistered = false
 
 fun registerLayer(
     context: Context,
@@ -35,18 +37,26 @@ fun registerLayer(
             }
         )
     }
+    isRegistered = true
 }
 
 fun enableLayer(context: Context, info: ApplicationInfo, name: String, target: String) {
-    OverlayAPI.getInstance(context) { api ->
-        api.setEnabled(
-            FabricatedOverlay.generateOverlayIdentifier(
-                "com.strangerweather.rootlessuimods.$target.$name",
-                "com.android.shell"
-            ), info.enabled, 0
-        )
+
+
+    if (isRegistered) {
+        OverlayAPI.getInstance(context) { api ->
+            api.setEnabled(
+                FabricatedOverlay.generateOverlayIdentifier(
+                    "com.strangerweather.rootlessuimods.$target.$name",
+                    "com.android.shell"
+                ), info.enabled, 0
+            )
+        }
+    } else {
+        Toast.makeText(context, "Register layer first", Toast.LENGTH_SHORT).show()
     }
 }
+
 
 fun disableLayer(
     context: Context,
@@ -62,7 +72,10 @@ fun disableLayer(
             ), !info.enabled, 0
         )
     }
-
+    if (!isRegistered){
+        Toast.makeText(context, "Nothing to undo!", Toast.LENGTH_SHORT).show()
+    }
+    isRegistered = false
 }
 
 fun deleteLayer(
