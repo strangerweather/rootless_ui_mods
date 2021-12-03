@@ -1,11 +1,12 @@
 package com.strangerweather.rootlessuimods.components.tabs
 
-import androidx.compose.material.Tab
-import androidx.compose.material.TabRow
-import androidx.compose.material.TabRowDefaults
-import androidx.compose.material.Text
+import androidx.compose.foundation.horizontalScroll
+import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import com.google.accompanist.pager.ExperimentalPagerApi
@@ -14,15 +15,17 @@ import kotlinx.coroutines.launch
 
 @ExperimentalPagerApi
 @Composable
-fun Tabs(pagerState: PagerState, listOfTitles: List<String>) {
+fun GenericTabScreen (pagerState: PagerState, listOfTitles: List<String>) {
     val scope = rememberCoroutineScope()
 
-    TabRow(selectedTabIndex = pagerState.currentPage, divider = {
-        TabRowDefaults.Divider(
-            thickness = 2.dp,
-            color = Color.DarkGray
-        )
-    }) {
+    ScrollableTabRow(
+        selectedTabIndex = pagerState.currentPage,
+        divider = {
+            TabRowDefaults.Divider(
+                thickness = 2.dp,
+                color = Color.DarkGray
+            )
+        }) {
         listOfTitles.forEachIndexed { index, _ ->
 
             Tab(selected = pagerState.currentPage == index,

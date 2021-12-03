@@ -19,7 +19,7 @@ import com.strangerweather.rootlessuimods.utils.MainViewModel
 fun ColorModsTabScreen() {
     val pagerState = rememberPagerState(initialPage = 0)
     Column(Modifier.height(200.dp)) {
-        Tabs(pagerState, listOf("Accent", "Drawers", "Text"))
+        GenericTabScreen(pagerState, listOf("Accent", "Drawers", "Text"))
         ColorModsTabsContent(pagerState)
     }
 
@@ -33,17 +33,17 @@ fun ColorModsTabsContent(pagerState: PagerState) {
 
     HorizontalPager(state = pagerState, count = 3) { page ->
         when (page) {
-            0 -> Tabs(
+            0 -> ColorTabs(
                 tabTitle = stringResource(id = R.string.tab1_color_title), tabText = stringResource(
                     id = R.string.tab1_color_explanation
                 )
             )
-            1 -> Tabs(
+            1 -> ColorTabs(
                 tabTitle = stringResource(id = R.string.tab2_color_title), tabText = stringResource(
                     id = R.string.tab2_color_explanation
                 )
             )
-            2 -> Tabs(
+            2 -> ColorTabs(
                 tabTitle = stringResource(id = R.string.tab3_color_title), tabText = stringResource(
                     id = R.string.tab3_color_explanation
                 )
