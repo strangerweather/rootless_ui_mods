@@ -48,6 +48,11 @@ fun ColorModsTabsContent(pagerState: PagerState) {
                     id = R.string.tab3_color_explanation
                 )
             )
+//            3 -> Tabs(
+//                tabTitle = stringResource(id = R.string.tab3_color_title), tabText = stringResource(
+//                    id = R.string.tab3_color_explanation
+//                )
+//            )
         }
         viewModel.onColorPageChanged(currentPage)
     }

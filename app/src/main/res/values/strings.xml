@@ -14,12 +14,16 @@
     <string name="tab1_screen_explanation">This mod allows you to remove the gesture navigation pill. Do not use if you have button navigation.</string>
     <string name="tab2_screen_explanation">This mod allows you to remove the navigation bar. Do not use if you have button navigation.</string>
     <string name="tab3_screen_explanation">Remove the status bar battery icon. You can show the battery percentage by toggling the option in device Settings.</string>
+    <string name="tab4_screen_explanation">This mod allows you to remove the status bar icons. This leaves the clock and battery icons.</string>
+    <string name="tab5_screen_explanation">This mod allows you to remove the status bar clock.</string>
     <string name="tab1_color_title">Accent Color Mod</string>
     <string name="tab2_color_title">Drawers Color Mod</string>
     <string name="tab3_color_title">Text Color Mod</string>
     <string name="tab1_screen_title">Gesture Pill Mod</string>
     <string name="tab2_screen_title">Navigation Bar Mod</string>
     <string name="tab3_screen_title">Status Bar Battery Icon</string>
+    <string name="tab4_screen_title">Status Bar Icons</string>
+    <string name="tab5_screen_title">Status Bar Clock</string>
     <string name="tab1_instr_1">Choose a Color</string>
     <string name="tab1_instr_2">Apply</string>
     <string name="color_picker">Color Picker</string>

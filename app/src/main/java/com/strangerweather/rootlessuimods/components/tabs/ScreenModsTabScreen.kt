@@ -19,7 +19,10 @@ import com.strangerweather.rootlessuimods.utils.MainViewModel
 fun ScreenModsTabScreen() {
     val pagerState = rememberPagerState(initialPage = 0)
     Column(Modifier.height(200.dp)) {
-        GenericTabScreen(pagerState, listOf("Pill", "NavBar", "Battery"))
+        GenericTabScreen(
+            pagerState,
+            listOf("Gesture Pill", "Nav Bar", "SB Battery", "SB Icons", "SB Clock")
+        )
         ScreenModsTabsContent(pagerState)
     }
 
@@ -31,21 +34,37 @@ fun ScreenModsTabsContent(pagerState: PagerState) {
 
     val viewModel: MainViewModel = viewModel()
 
-    HorizontalPager(state = pagerState, count = 3) { page ->
+    HorizontalPager(state = pagerState, count = 5) { page ->
         when (page) {
             0 -> Tabs(
-                tabTitle = stringResource(id = R.string.tab1_screen_title), tabText = stringResource(
+                tabTitle = stringResource(id = R.string.tab1_screen_title),
+                tabText = stringResource(
                     id = R.string.tab1_screen_explanation
                 )
             )
             1 -> Tabs(
-                tabTitle = stringResource(id = R.string.tab2_screen_title), tabText = stringResource(
+                tabTitle = stringResource(id = R.string.tab2_screen_title),
+                tabText = stringResource(
                     id = R.string.tab2_screen_explanation
                 )
             )
             2 -> Tabs(
-                tabTitle = stringResource(id = R.string.tab3_screen_title), tabText = stringResource(
+                tabTitle = stringResource(id = R.string.tab3_screen_title),
+                tabText = stringResource(
                     id = R.string.tab3_screen_explanation
+                )
+            )
+            3 -> Tabs(
+                tabTitle = stringResource(id = R.string.tab4_screen_title),
+                tabText = stringResource(
+                    id = R.string.tab4_screen_explanation
+                )
+            )
+
+            4 -> Tabs(
+                tabTitle = stringResource(id = R.string.tab5_screen_title),
+                tabText = stringResource(
+                    id = R.string.tab5_screen_explanation
                 )
             )
         }
