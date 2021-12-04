@@ -16,10 +16,10 @@ import androidx.compose.ui.unit.dp
 import com.godaddy.android.colorpicker.ClassicColorPicker
 import com.godaddy.android.colorpicker.HsvColor
 import com.godaddy.android.colorpicker.toColorInt
-import com.strangerweather.rootlessuimods.ui.theme.Purple500
+import com.strangerweather.rootlessuimods.ui.theme.OrangeMedium
 
 
-var resourceValue = mutableStateOf(Purple500.toArgb())
+var resourceValue = mutableStateOf(OrangeMedium.toArgb())
 
 @ExperimentalGraphicsApi
 @Composable

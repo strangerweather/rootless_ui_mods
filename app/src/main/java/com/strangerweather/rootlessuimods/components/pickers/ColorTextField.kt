@@ -18,7 +18,7 @@ import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.text.input.KeyboardCapitalization
 import androidx.compose.ui.unit.dp
 import com.strangerweather.rootlessuimods.functions.registerLayer
-import com.strangerweather.rootlessuimods.ui.theme.Purple500
+import com.strangerweather.rootlessuimods.ui.theme.OrangeMedium
 
 
 object HexToJetpackColor {
@@ -60,14 +60,14 @@ fun ColorTextField(context: Context, name: String, target: String, overlay: Stri
             label = { Text(text = "Enter Hex Value") },
             singleLine = true,
             colors = TextFieldDefaults.outlinedTextFieldColors(
-                focusedBorderColor = Purple500,
-                unfocusedBorderColor = Purple500
+                focusedBorderColor = OrangeMedium,
+                unfocusedBorderColor = OrangeMedium
             ),
             leadingIcon = {
                 Icon(
                     imageVector = Icons.Filled.Palette,
                     contentDescription = "palette icon",
-                    tint = Purple500
+                    tint = OrangeMedium
                 )
             },
             trailingIcon = {
@@ -77,7 +77,7 @@ fun ColorTextField(context: Context, name: String, target: String, overlay: Stri
                     Icon(
                         imageVector = Icons.Filled.Check,
                         contentDescription = "check icon",
-                        tint = Purple500
+                        tint = OrangeMedium
                     )
                 }
             },

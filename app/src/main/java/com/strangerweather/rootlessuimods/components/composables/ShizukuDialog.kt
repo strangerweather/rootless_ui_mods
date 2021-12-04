@@ -24,9 +24,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.strangerweather.rootlessuimods.R
-import com.strangerweather.rootlessuimods.content.HomeScreen
-import com.strangerweather.rootlessuimods.ui.theme.Purple200
-import kotlin.TODO
+import com.strangerweather.rootlessuimods.ui.theme.OrangeLight
 
 
 @Composable
@@ -97,10 +95,10 @@ fun DialogScreen() {
         Text(
             modifier = Modifier
                 .clickable { context.startActivity(intent) }
-                .border(width = 2.dp, color = Purple200)
+                .border(width = 2.dp, color = OrangeLight)
                 .padding(20.dp),
             text = "Get Shizuku",
-            color = Purple200,
+            color = OrangeLight,
             fontSize = 20.sp
         )
         Text(
