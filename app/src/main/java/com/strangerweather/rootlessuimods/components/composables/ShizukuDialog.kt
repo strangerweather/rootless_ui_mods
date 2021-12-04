@@ -74,7 +74,7 @@ fun DialogScreen() {
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Text(
-            text = stringResource(id = R.string.home_screen_title),
+            text = stringResource(id = R.string.home_screen_dialog_title),
             style = TextStyle(
                 fontSize = 22.sp,
                 fontWeight = FontWeight.Bold
@@ -88,7 +88,7 @@ fun DialogScreen() {
                 .padding(20.dp),
         )
         Text(
-            text = stringResource(id = R.string.home_screen_text1),
+            text = stringResource(id = R.string.home_screen_dialog_text1),
             Modifier.padding(start = 20.dp, end = 20.dp),
             textAlign = TextAlign.Center
         )
@@ -102,7 +102,7 @@ fun DialogScreen() {
             fontSize = 20.sp
         )
         Text(
-            text = stringResource(id = R.string.home_screen_credits),
+            text = stringResource(id = R.string.home_screen_dialog_credits),
             textAlign = TextAlign.Center,
             modifier = Modifier.padding(bottom = 100.dp)
         )

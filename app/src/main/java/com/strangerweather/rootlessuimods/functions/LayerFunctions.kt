@@ -41,8 +41,6 @@ fun registerLayer(
 }
 
 fun enableLayer(context: Context, info: ApplicationInfo, name: String, target: String) {
-
-
     if (isRegistered) {
         OverlayAPI.getInstance(context) { api ->
             api.setEnabled(
