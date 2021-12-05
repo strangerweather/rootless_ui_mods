@@ -1,6 +1,5 @@
 package com.strangerweather.rootlessuimods
 
-import android.app.AlertDialog
 import android.content.Context
 import android.os.Bundle
 import android.widget.Toast
@@ -10,8 +9,10 @@ import androidx.compose.foundation.layout.RowScope
 import androidx.compose.material.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.graphics.ExperimentalGraphicsApi
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
+import androidx.datastore.preferences.core.booleanPreferencesKey
+import androidx.datastore.preferences.core.edit
+import androidx.datastore.preferences.preferencesDataStore
 import androidx.navigation.NavDestination
 import androidx.navigation.NavDestination.Companion.hierarchy
 import androidx.navigation.NavGraph.Companion.findStartDestination
@@ -24,17 +25,18 @@ import com.strangerweather.rootlessuimods.navigation.BottomBarScreen
 import com.strangerweather.rootlessuimods.navigation.BottomNavGraph
 import com.strangerweather.rootlessuimods.ui.theme.RootlessUIModsTheme
 import kotlinx.coroutines.delay
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 import org.lsposed.hiddenapibypass.HiddenApiBypass
-import tk.zwander.fabricateoverlay.FabricatedOverlay
-import tk.zwander.fabricateoverlay.FabricatedOverlayEntry
-import tk.zwander.fabricateoverlay.OverlayAPI
 import tk.zwander.fabricateoverlay.ShizukuUtils
 
 
 @ExperimentalGraphicsApi
 class MainActivity : ComponentActivity() {
+
+
+
     @ExperimentalPagerApi
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
