@@ -70,10 +70,6 @@ fun disableLayer(
             ), !info.enabled, 0
         )
     }
-    if (!isRegistered){
-        Toast.makeText(context, "Nothing to undo!", Toast.LENGTH_SHORT).show()
-    }
-    isRegistered = false
 }
 
 fun deleteLayer(
@@ -96,6 +92,9 @@ suspend fun removeAndDelete(
     name: String,
     target: String
 ) = coroutineScope { // this: CoroutineScope
-    disableLayer(context, info, name, target)
-    deleteLayer(context, name, target)
+    if (isRegistered) {
+        disableLayer(context, info, name, target)
+        deleteLayer(context, name, target)
+    } else
+        Toast.makeText(context, "Nothing to undo!", Toast.LENGTH_SHORT).show()
 }
