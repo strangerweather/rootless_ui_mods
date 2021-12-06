@@ -27,8 +27,8 @@ fun ColorModsContent(applicationContext: Context, applicationInfo: ApplicationIn
         val overlay = when (currentPage.value) {
             0 -> "color/system_accent1_100"
             1 -> "color/system_neutral1_50"
-            2 -> "color/system_neutral1_0"
-//            3 -> "color/status_bar_notification_row_background_color"
+            2 -> "color/system_neutral1_900"
+            3 -> "color/system_neutral1_0"
             else -> ""
         }
 
@@ -36,15 +36,15 @@ fun ColorModsContent(applicationContext: Context, applicationInfo: ApplicationIn
             0 -> "android"
             1 -> "android"
             2 -> "android"
-//            3 -> "com.android.systemui"
+            3 -> "android"
             else -> ""
         }
 
         val name = when (currentPage.value) {
             0 -> "accent1_100"
             1 -> "neutral1_50"
-            2 -> "neutral1_0"
-//            3 -> "status_bar_notification_row_background_color"
+            2 -> "neutral1_900"
+            3 -> "neutral1_0"
             else -> ""
         }
 
