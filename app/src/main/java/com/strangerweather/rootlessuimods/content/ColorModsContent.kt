@@ -29,6 +29,7 @@ fun ColorModsContent(applicationContext: Context, applicationInfo: ApplicationIn
             1 -> "color/system_neutral1_50"
             2 -> "color/system_neutral1_900"
             3 -> "color/system_neutral1_0"
+            4 -> "color/system_accent1_900"
             else -> ""
         }
 
@@ -37,6 +38,7 @@ fun ColorModsContent(applicationContext: Context, applicationInfo: ApplicationIn
             1 -> "android"
             2 -> "android"
             3 -> "android"
+            4 -> "android"
             else -> ""
         }
 
@@ -45,6 +47,7 @@ fun ColorModsContent(applicationContext: Context, applicationInfo: ApplicationIn
             1 -> "neutral1_50"
             2 -> "neutral1_900"
             3 -> "neutral1_0"
+            4 -> "testing"
             else -> ""
         }
 
